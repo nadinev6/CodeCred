@@ -43,7 +43,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
       <Text style={styles.projectTitle}>{title}</Text>
       {verified && (
         <View style={styles.verifiedBadge}>
-          <Shield size={16} color="#22c55e" />
+          <CircleCheck size={16} color="#22c55e" />
         </View>
       )}
     </View>
