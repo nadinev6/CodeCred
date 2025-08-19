@@ -188,7 +188,7 @@ export default function ProfileScreen() {
                 <Text style={styles.achievementText}>Top Contributor</Text>
               </View>
               <View style={styles.achievementBadge}>
-                <Shield size={24} color="#22c55e" />
+                <CircleCheck size={24} color="#22c55e" />
                 <Text style={styles.achievementText}>Verified Developer</Text>
               </View>
               <View style={styles.achievementBadge}>
