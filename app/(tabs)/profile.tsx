@@ -124,7 +124,7 @@ export default function ProfileScreen() {
                 <Text style={styles.avatarText}>JD</Text>
               </View>
               <View style={styles.verificationBadge}>
-                <Shield size={20} color="#22c55e" fill="#22c55e" />
+                <CircleCheck size={20} color="#22c55e" fill="#22c55e" />
               </View>
             </View>
             
