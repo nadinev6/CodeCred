@@ -158,7 +158,7 @@ export default function ProfileScreen() {
               <StatCard
                 title="Verified"
                 value="12"
-                icon={<Shield size={20} color="#00bfff" />}
+                icon={<CircleCheck size={20} color="#00bfff" />}
                 color="#00bfff"
               />
               <StatCard
