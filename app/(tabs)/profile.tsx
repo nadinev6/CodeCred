@@ -121,7 +121,10 @@ export default function ProfileScreen() {
           <View style={styles.profileHeader}>
             <View style={styles.avatarContainer}>
               <View style={styles.avatar}>
-                <Text style={styles.avatarText}>JD</Text>
+                <Image 
+                  source={require('../../assets/images/1755687723565.png')}
+                  style={styles.avatarImage}
+                />
               </View>
               <View style={styles.verificationBadge}>
                 <CircleCheck size={20} color="#22c55e" fill="#22c55e" />
@@ -289,6 +292,11 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     color: '#ffffff',
+  },
+  avatarImage: {
+    width: 74,
+    height: 74,
+    borderRadius: 37,
   },
   verificationBadge: {
     position: 'absolute',
