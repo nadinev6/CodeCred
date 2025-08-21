@@ -117,6 +117,7 @@ export default function HomeScreen() {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <MaskedView
             style={styles.maskedView}
@@ -137,7 +138,7 @@ export default function HomeScreen() {
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 180 }]}
         >
           <View style={styles.filterSection}>
             <ScrollView 
@@ -190,7 +191,6 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   maskedView: {
-    height: 36,
     marginBottom: 4,
   },
   maskText: {

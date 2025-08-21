@@ -252,7 +252,7 @@ export default function SubmitScreen() {
       colors={['#0A0D14', '#1A202C']}
       style={styles.gradient}
     >
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Submit Project</Text>
           <Text style={styles.headerSubtitle}>Get your project verified on the blockchain</Text>
@@ -263,7 +263,7 @@ export default function SubmitScreen() {
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 200 }]}
         >
           <View style={styles.stepHeader}>
             <Text style={styles.stepTitle}>{steps[currentStep]}</Text>
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 120,
+    paddingBottom: 20,
   },
   stepHeader: {
     padding: 20,

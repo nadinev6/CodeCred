@@ -112,11 +112,11 @@ export default function ProfileScreen() {
       colors={['#0A0D14', '#1A202C']}
       style={styles.gradient}
     >
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 180 }]}
         >
           <View style={styles.profileHeader}>
             <View style={styles.avatarContainer}>
@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 100,
+    paddingBottom: 20,
   },
   profileHeader: {
     alignItems: 'center',

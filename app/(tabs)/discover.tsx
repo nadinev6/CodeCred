@@ -58,7 +58,7 @@ export default function DiscoverScreen() {
       colors={['#0A0D14', '#1A202C']}
       style={styles.gradient}
     >
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Discover Projects</Text>
           <Text style={styles.headerSubtitle}>Explore verified developer work</Text>
@@ -67,7 +67,7 @@ export default function DiscoverScreen() {
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 180 }]}
         >
           <View style={styles.searchSection}>
             <View style={styles.searchContainer}>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: 100,
+    paddingBottom: 20,
   },
   searchSection: {
     padding: 20,
