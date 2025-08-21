@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import MaskedView from '@react-native-masked-view/masked-view';
 import { Star, GitBranch, CircleCheck as CheckCircle, Eye } from 'lucide-react-native';
 
 interface ProjectCardProps {
@@ -122,7 +123,19 @@ export default function HomeScreen() {
     >
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>CODECRED</Text>
+          <MaskedView
+            style={styles.maskedView}
+            maskElement={
+              <Text style={[styles.headerTitle, styles.maskText]}>
+                CODECRED FEED
+              </Text>
+            }
+          >
+            <LinearGradient
+              colors={['#fff', '#ccc']}
+              style={styles.gradientText}
+            />
+          </MaskedView>
           <Text style={styles.headerSubtitle}>Discover verified developer projects</Text>
         </View>
         
@@ -153,7 +166,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.projectList}>
-            {mockProjects.map((project) => (
+            {mockProjects.map((project, index) => (
               <ProjectCard key={project.id} {...project} />
             ))}
           </View>
@@ -179,9 +192,18 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#f0f6fc',
     fontFamily: 'RobotoMono-Regular',
     marginBottom: 4,
+  },
+  maskedView: {
+    height: 28,
+    marginBottom: 4,
+  },
+  maskText: {
+    color: 'transparent',
+  },
+  gradientText: {
+    flex: 1,
   },
   headerSubtitle: {
     fontSize: 16,

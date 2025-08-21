@@ -227,6 +227,12 @@ export default function SubmitScreen() {
                 <Text style={styles.reviewValue}>{formData.description || 'Not provided'}</Text>
               </View>
             </View>
+
+            <View style={styles.disclaimerBox}>
+              <Text style={styles.disclaimerText}>
+                By submitting this project, you confirm that you are the owner or have proper authorization to verify this repository.
+              </Text>
+            </View>
           </View>
         );
 
