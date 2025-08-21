@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Search, Blocks, Filter, TrendingUp, Brain, Smartphone } from 'lucide-react-native';
+import { Search, Blocks, PanelTop, Filter, TrendingUp, Brain, Smartphone } from 'lucide-react-native';
 
 interface CategoryCardProps {
   title: string;
@@ -46,7 +46,7 @@ const categories = [
     title: 'Web Development',
     count: 267,
     color: '#10b981',
-    icon: <TrendingUp size={24} color="#10b981" />,
+    icon: <PanelTop size={24} color="#10b981" />,
   },
 ];
 
