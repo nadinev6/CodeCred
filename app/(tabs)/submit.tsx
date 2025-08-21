@@ -240,7 +240,7 @@ export default function SubmitScreen() {
       colors={['#0A0D14', '#1A202C']}
       style={styles.gradient}
     >
-      <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Submit Project</Text>
           <Text style={styles.headerSubtitle}>Get your project verified on the blockchain</Text>
@@ -251,7 +251,7 @@ export default function SubmitScreen() {
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 120 }]}
         >
           <View style={styles.stepHeader}>
             <Text style={styles.stepTitle}>{steps[currentStep]}</Text>
@@ -259,8 +259,10 @@ export default function SubmitScreen() {
 
           {renderStepContent()}
         </ScrollView>
+      </SafeAreaView>
 
-        <View style={styles.bottomBar}>
+      <View style={styles.fixedBottomBarContainer}>
+        <SafeAreaView edges={['bottom']} style={styles.bottomBarSafeArea}>
           {currentStep > 0 && (
             <TouchableOpacity style={styles.secondaryButton} onPress={handlePrevious}>
               <Text style={styles.secondaryButtonText}>Previous</Text>
@@ -275,8 +277,8 @@ export default function SubmitScreen() {
               {currentStep === steps.length - 1 ? 'Submit Project' : 'Next'}
             </Text>
           </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+        </SafeAreaView>
+      </View>
     </LinearGradient>
   );
 }
@@ -551,7 +553,14 @@ const styles = StyleSheet.create({
     color: '#e6edf3',
     lineHeight: 20,
   },
-  bottomBar: {
+  fixedBottomBarContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'transparent',
+  },
+  bottomBarSafeArea: {
     backgroundColor: 'transparent',
     borderTopWidth: 1,
     borderTopColor: '#1a1f24',
@@ -564,6 +573,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#1a1f24',
     borderRadius: 8,
     paddingVertical: 10,
+    paddingHorizontal: 20,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#24292e',
@@ -578,6 +588,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#00bfff',
     borderRadius: 8,
     paddingVertical: 10,
+    paddingHorizontal: 20,
     alignItems: 'center',
   },
   primaryButtonText: {
