@@ -1,4 +1,4 @@
-# <img src="assets/images/2755687723565.png" width="34" height="34" alt="CodeCred Logo"> CodeCred Mobile App
+# <img src="assets/images/2755687723565.png" width="34" height="34" alt="CodeCred Logo"> CODECRED Mobile App
 
 A professional mobile application built with React Native and Expo, designed to showcase and verify developer credentials through blockchain technology. The app features a clean, GitHub-inspired interface for discovering, submitting, and verifying code repositories.
 
