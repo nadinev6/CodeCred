@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   logoImage: {
     width: 32,
     height: 32,
-    marginRight: 12,
+    marginRight: 8,
   },
   headerTitle: {
     fontSize: 28,
