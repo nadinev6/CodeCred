@@ -123,7 +123,9 @@ export default function HomeScreen() {
             fy="50%"
           >
             <Stop offset="0%" stopColor="#31e5c8" />
-            <Stop offset="100%" stopColor="#0A0D14 " />
+           <Stop offset="25%" stopColor="#0A0D14" />
+           <Stop offset="100%" stopColor="#0A0D14" />
+            <Stop offset="100%" stopColor="#0A0D14" />
           </RadialGradient>
         </Defs>
         <Rect width="100%" height="100%" fill="url(#radialBackground)" />
