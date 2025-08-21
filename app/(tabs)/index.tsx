@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import MaskedView from '@react-native-masked-view/masked-view';
 import { Star, GitBranch, CircleCheck as CheckCircle, Eye } from 'lucide-react-native';
 
 interface ProjectCardProps {
@@ -117,7 +118,24 @@ export default function HomeScreen() {
     >
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>CODECRED</Text>
+          <View style={styles.headerContent}>
+            <MaskedView
+              style={styles.logoContainer}
+              maskElement={
+                <Image
+                  source={require('../../assets/images/1755687723565.png')}
+                  style={styles.logoImage}
+                  resizeMode="contain"
+                />
+              }
+            >
+              <LinearGradient
+                colors={['#f0f6fc', '#7d8590']}
+                style={styles.logoGradient}
+              />
+            </MaskedView>
+            <Text style={styles.headerTitle}>CODECRED</Text>
+          </View>
           <Text style={styles.headerSubtitle}>Discover verified developer projects</Text>
         </View>
         
@@ -171,12 +189,30 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#21262d',
   },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  logoContainer: {
+    width: 32,
+    height: 32,
+    marginRight: 12,
+  },
+  logoImage: {
+    width: 32,
+    height: 32,
+  },
+  logoGradient: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
     color: '#f0f6fc',
     fontFamily: 'RobotoMono-Regular',
-    marginBottom: 4,
   },
   headerSubtitle: {
     fontSize: 16,
