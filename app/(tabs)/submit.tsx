@@ -240,7 +240,7 @@ export default function SubmitScreen() {
       colors={['#0A0D14', '#1A202C']}
       style={styles.gradient}
     >
-      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Submit Project</Text>
           <Text style={styles.headerSubtitle}>Get your project verified on the blockchain</Text>
