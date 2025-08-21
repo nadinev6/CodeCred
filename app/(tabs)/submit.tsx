@@ -584,7 +584,7 @@ const styles = StyleSheet.create({
     color: '#f0f6fc',
   },
   primaryButton: {
-    flex: 2,
+    flex: 1,
     backgroundColor: '#00bfff',
     borderRadius: 8,
     paddingVertical: 10,
