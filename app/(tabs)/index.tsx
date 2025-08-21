@@ -184,15 +184,16 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   logoImage: {
-    width: 32,
-    height: 32,
-    marginRight: 12,
+    width: 34,
+    height: 34,
+    marginRight: 4,
   },
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: '#f0f6fc',
+    color: '#31e5c8',
     fontFamily: 'RobotoMono-Regular',
+    letterSpacing: 1.2,
   },
   headerSubtitle: {
     fontSize: 16,
