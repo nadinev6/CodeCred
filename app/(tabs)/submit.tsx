@@ -241,6 +241,7 @@ export default function SubmitScreen() {
       style={styles.gradient}
     >
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right', 'bottom']}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Submit Project</Text>
           <Text style={styles.headerSubtitle}>Get your project verified on the blockchain</Text>
@@ -251,7 +252,7 @@ export default function SubmitScreen() {
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.scrollContent, { paddingBottom: 200 }]}
+          contentContainerStyle={styles.scrollContent}
         >
           <View style={styles.stepHeader}>
             <Text style={styles.stepTitle}>{steps[currentStep]}</Text>
@@ -552,11 +553,7 @@ const styles = StyleSheet.create({
     lineHeight: 20,
   },
   bottomBar: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(10, 13, 20, 0.95)',
+    backgroundColor: 'transparent',
     borderTopWidth: 1,
     borderTopColor: '#1a1f24',
     padding: 20,
@@ -567,7 +564,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#1a1f24',
     borderRadius: 8,
-    paddingVertical: 16,
+    paddingVertical: 10,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#24292e',
@@ -581,7 +578,7 @@ const styles = StyleSheet.create({
     flex: 2,
     backgroundColor: '#00bfff',
     borderRadius: 8,
-    paddingVertical: 16,
+    paddingVertical: 10,
     alignItems: 'center',
   },
   primaryButtonText: {
