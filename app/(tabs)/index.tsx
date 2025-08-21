@@ -119,21 +119,13 @@ export default function HomeScreen() {
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
-            <MaskedView
-              style={styles.logoContainer}
-              maskElement={
-                <Image
-                  source={require('../../assets/images/1755687723565.png')}
-                  style={styles.logoImage}
-                  resizeMode="contain"
-                />
-              }
-            >
-              <LinearGradient
-                colors={['#f0f6fc', '#7d8590']}
-                style={styles.logoGradient}
-              />
-            </MaskedView>
+            // Inside the headerContent View in app/(tabs)/index.tsx
+
+<Image
+  source={require('../../assets/images/1755687723565.png')}
+  style={{ width: 50, height: 50, marginRight: 12, backgroundColor: 'none' }} 
+  resizeMode="contain"
+/>
             <Text style={styles.headerTitle}>CODECRED</Text>
           </View>
           <Text style={styles.headerSubtitle}>Discover verified developer projects</Text>
