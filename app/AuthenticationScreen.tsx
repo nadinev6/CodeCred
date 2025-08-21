@@ -6,78 +6,113 @@ import { Button } from '../components/ui/Button';
 import { xionService, XionAccount } from '../../services/xion';
 import { reclaimService } from '../../services/reclaim';
 
-export default function AuthScreen() {
-  const [xionAccount, setXionAccount] = useState<XionAccount | null>(null);
-  const [loading, setLoading] = useState(false);
+export const XionScreen = () => {
+  const [account, setAccount] = useState<XionAccount | null>(null);
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    checkExistingAuth();
+    checkConnection();
   }, []);
 
-  const checkExistingAuth = async () => {
+  const checkConnection = async () => {
     try {
-      const account = await xionService.getAccount();
-      setXionAccount(account);
-    } catch (error) {
-      console.log('No existing auth');
+      const connectedAccount = await xionService.getAccount();
+      setAccount(connectedAccount);
+    } catch (err) {
+      console.log('No account connected');
     }
   };
 
-  const handleXionAuth = async () => {
-    setLoading(true);
+  const handleConnect = async () => {
+    setIsConnecting(true);
+    setError(null);
+    
     try {
-      const account = await xionService.authenticate();
-      setXionAccount(account);
-    } catch (error) {
-      console.error('Auth failed:', error);
+      const connectedAccount = await xionService.connect();
+      setAccount(connectedAccount);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to connect');
     } finally {
-      setLoading(false);
+      setIsConnecting(false);
     }
   };
 
-  const handleCompleteVerification = async () => {
-    setLoading(true);
+  const handleDisconnect = async () => {
     try {
-      await reclaimService.generateProof();
-      // Handle successful verification
-    } catch (error) {
-      console.error('Verification failed:', error);
-    } finally {
-      setLoading(false);
+      await xionService.disconnect();
+      setAccount(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to disconnect');
+    }
+  };
+
+  const handleCreateProof = async () => {
+    if (!account) return;
+    
+    try {
+      // This would integrate with Reclaim Protocol
+      const proof = await reclaimService.createProof({
+        provider: 'github',
+        parameters: {
+          username: 'example'
+        }
+      });
+      
+      console.log('Proof created:', proof);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create proof');
     }
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#0A0D14' }]}>
+    <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#0A0D14', '#1A202C']}
+        colors={['#0d1117', '#161b22', '#21262d']}
         style={styles.gradient}
       >
         <View style={styles.content}>
-          <Text style={styles.title}>Authentication</Text>
-          <Text style={styles.subtitle}>Connect your XION account to get started</Text>
-          
-          {!xionAccount ? (
-            <Button 
-              title="Connect with XION" 
-              onPress={handleXionAuth}
-              disabled={loading}
-            />
-          ) : (
+          <Text style={styles.title}>XION Wallet</Text>
+          <Text style={styles.subtitle}>
+            Connect your XION wallet to create proofs
+          </Text>
+
+          {error && (
+            <Text style={{ color: '#f85149', marginBottom: 20, textAlign: 'center' }}>
+              {error}
+            </Text>
+          )}
+
+          {account ? (
             <View style={styles.connectedContainer}>
-              <Text style={styles.connectedText}>Connected: {xionAccount.address}</Text>
-              <Button 
-                title="Complete GitHub Verification"
-                onPress={handleCompleteVerification}
-                disabled={loading}
+              <Text style={styles.connectedText}>
+                Connected: {account.address}
+              </Text>
+              
+              <Button
+                title="Create Proof"
+                onPress={handleCreateProof}
+                style={{ marginBottom: 10 }}
+              />
+              
+              <Button
+                title="Disconnect"
+                onPress={handleDisconnect}
+                variant="secondary"
               />
             </View>
+          ) : (
+            <Button
+              title={isConnecting ? "Connecting..." : "Connect XION Wallet"}
+              onPress={handleConnect}
+              disabled={isConnecting}
+            />
           )}
         </View>
       </LinearGradient>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -88,20 +123,20 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    padding: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
   },
   title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#f0f6fc',
     marginBottom: 8,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: '#A0AEC0',
+    color: '#7d8590',
     marginBottom: 40,
     textAlign: 'center',
   },
@@ -111,7 +146,8 @@ const styles = StyleSheet.create({
   },
   connectedText: {
     fontSize: 16,
-    color: '#68D391',
+    color: '#22c55e',
+    textAlign: 'center',
     marginBottom: 20,
   },
 });
