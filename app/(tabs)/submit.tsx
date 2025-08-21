@@ -253,6 +253,11 @@ export default function SubmitScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={[styles.scrollContent, { paddingBottom: 120 }]}
         >
+        <ScrollView 
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 160 }]}
+        >
           <View style={styles.stepHeader}>
             <Text style={styles.stepTitle}>{steps[currentStep]}</Text>
           </View>
@@ -564,7 +569,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderTopWidth: 1,
     borderTopColor: '#1a1f24',
-    paddingVertical: 10,
     paddingHorizontal: 20,
     flexDirection: 'row',
     gap: 12,
