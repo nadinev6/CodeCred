@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from '../components/ui/Button';
-import { xionService, XionAccount } from '../../services/xion';
-import { reclaimService } from '../../services/reclaim';
+import { xionService, XionAccount } from '../services/xion';
+import { reclaimService } from '../services/reclaim';
 
 export const XionScreen = () => {
   const [account, setAccount] = useState<XionAccount | null>(null);
