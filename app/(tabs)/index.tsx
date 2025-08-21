@@ -122,7 +122,7 @@ export default function HomeScreen() {
             style={styles.maskedView}
             maskElement={
               <Text style={[styles.headerTitle, styles.maskText]}>
-                CODECRED
+                CODECRED FEED
               </Text>
             }
           >
