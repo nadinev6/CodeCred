@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import MaskedView from '@react-native-masked-view/masked-view';
 import { Star, GitBranch, CircleCheck as CheckCircle, Eye } from 'lucide-react-native';
 
 interface ProjectCardProps {
@@ -119,13 +118,11 @@ export default function HomeScreen() {
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
-            // Inside the headerContent View in app/(tabs)/index.tsx
-
-<Image
-  source={require('../../assets/images/1755687723565.png')}
-  style={{ width: 50, height: 50, marginRight: 12, backgroundColor: 'none' }} 
-  resizeMode="contain"
-/>
+            <Image
+              source={require('../../assets/images/2755687723565.png')}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
             <Text style={styles.headerTitle}>CODECRED</Text>
           </View>
           <Text style={styles.headerSubtitle}>Discover verified developer projects</Text>
@@ -186,21 +183,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 4,
   },
-  logoContainer: {
-    width: 32,
-    height: 32,
-    marginRight: 12,
-  },
   logoImage: {
-    width: 32,
-    height: 32,
-  },
-  logoGradient: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-  },
-  logoContainer: {
     width: 32,
     height: 32,
     marginRight: 12,

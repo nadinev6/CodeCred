@@ -6,7 +6,7 @@ import { Button } from '../components/ui/Button';
 import { xionService, XionAccount } from '../services/xion';
 import { reclaimService } from '../services/reclaim';
 
-export const XionScreen = () => {
+export default function AuthenticationScreen() {
   const [account, setAccount] = useState<XionAccount | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -72,9 +72,9 @@ export const XionScreen = () => {
     >
       <SafeAreaView style={styles.container}>
         <View style={styles.content}>
-          <Text style={styles.title}>XION Wallet</Text>
+          <Text style={styles.title}>CodeCred Authentication</Text>
           <Text style={styles.subtitle}>
-            Connect your XION wallet to create proofs
+            Connect your wallet to verify your projects
           </Text>
 
           {error && (
@@ -112,7 +112,7 @@ export const XionScreen = () => {
       </SafeAreaView>
     </LinearGradient>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
