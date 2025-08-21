@@ -226,6 +226,7 @@ export default function SubmitScreen() {
                 <Text style={styles.reviewLabel}>Description</Text>
                 <Text style={styles.reviewValue}>{formData.description || 'Not provided'}</Text>
               </View>
+            </View>
           </View>
         );
 
