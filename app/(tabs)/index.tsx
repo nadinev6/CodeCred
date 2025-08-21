@@ -115,16 +115,16 @@ export default function HomeScreen() {
       <Svg style={StyleSheet.absoluteFillObject} width="100%" height="100%">
         <Defs>
           <RadialGradient
-  id="radialBackground"
-  cx="50%"
-  cy="50%"
-  r="70%"
-  fx="50%"
-  fy="50%"
->
-  <Stop offset="0%" stopColor="#31e5c8" stopOpacity="0.15" />
-  <Stop offset="100%" stopColor="#0A0D14" />
-</RadialGradient>
+            id="radialBackground" 
+            cx="50%"
+            cy="50%"
+            r="70%" 
+            fx="50%"
+            fy="50%"
+          >
+            <Stop offset="0%" stopColor="#31e5c8" />
+            <Stop offset="100%" stopColor="#0A0D14 " />
+          </RadialGradient>
         </Defs>
         <Rect width="100%" height="100%" fill="url(#radialBackground)" />
       </Svg>
