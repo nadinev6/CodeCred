@@ -253,11 +253,6 @@ export default function SubmitScreen() {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={[styles.scrollContent, { paddingBottom: 120 }]}
         >
-        <ScrollView 
-          style={styles.scrollView}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.scrollContent, { paddingBottom: 160 }]}
-        >
           <View style={styles.stepHeader}>
             <Text style={styles.stepTitle}>{steps[currentStep]}</Text>
           </View>
