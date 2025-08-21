@@ -200,6 +200,11 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
+  logoContainer: {
+    width: 32,
+    height: 32,
+    marginRight: 12,
+  },
   headerTitle: {
     fontSize: 28,
     fontWeight: '700',
