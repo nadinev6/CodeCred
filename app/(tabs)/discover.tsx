@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Search, Filter, TrendingUp, Brain, Smartphone } from 'lucide-react-native';
+import { Search, Blocks, Filter, TrendingUp, Brain, Smartphone } from 'lucide-react-native';
 
 interface CategoryCardProps {
   title: string;
@@ -28,7 +28,7 @@ const categories = [
     title: 'DeFi & Blockchain',
     count: 156,
     color: '#3b82f6',
-    icon: <TrendingUp size={24} color="#3b82f6" />,
+    icon: <Blocks size={24} color="#3b82f6" />,
   },
   {
     title: 'AI & Machine Learning',
