@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
+import { Svg, Rect, Defs, RadialGradient, Stop } from 'react-native-svg';
 import { Star, GitBranch, CircleCheck as CheckCircle, Eye } from 'lucide-react-native';
 
 interface ProjectCardProps {
@@ -111,10 +111,23 @@ const mockProjects: ProjectCardProps[] = [
 
 export default function HomeScreen() {
   return (
-    <LinearGradient
-      colors={['#0A0D14', '#1A202C']}
-      style={styles.gradient}
-    >
+    <View style={styles.container}>
+      <Svg style={StyleSheet.absoluteFillObject} width="100%" height="100%">
+        <Defs>
+          <RadialGradient
+            id="radialBackground"
+            cx="50%"
+            cy="50%"
+            r="70%"
+            fx="50%"
+            fy="50%"
+          >
+            <Stop offset="0%" stopColor="#0A0D14" />
+            <Stop offset="100%" stopColor="#31e5c8" />
+          </RadialGradient>
+        </Defs>
+        <Rect width="100%" height="100%" fill="url(#radialBackground)" />
+      </Svg>
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <View style={styles.headerContent}>
@@ -161,15 +174,12 @@ export default function HomeScreen() {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  gradient: {
     flex: 1,
   },
   header: {
