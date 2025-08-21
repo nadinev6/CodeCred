@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Search, Filter, TrendingUp, Star, Users } from 'lucide-react-native';
+import { Search, Filter, TrendingUp, Brain, Smartphone } from 'lucide-react-native';
 
 interface CategoryCardProps {
   title: string;
@@ -34,13 +34,13 @@ const categories = [
     title: 'AI & Machine Learning',
     count: 203,
     color: '#8b5cf6',
-    icon: <Star size={24} color="#8b5cf6" />,
+    icon: <Brain size={24} color="#8b5cf6" />,
   },
   {
     title: 'Mobile Development',
     count: 89,
     color: '#06b6d4',
-    icon: <Users size={24} color="#06b6d4" />,
+    icon: <Smartphone size={24} color="#06b6d4" />,
   },
   {
     title: 'Web Development',
@@ -54,9 +54,9 @@ export default function DiscoverScreen() {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: '#0A0D14' }]}>
       <LinearGradient
-        colors={['#0A0D14', '#12151F']}
+        colors={['#0A0D14', '#1A202C']}
         style={styles.gradient}
       >
         <View style={styles.header}>

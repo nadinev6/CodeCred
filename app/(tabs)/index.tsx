@@ -111,9 +111,9 @@ const mockProjects: ProjectCardProps[] = [
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { backgroundColor: '#0A0D14' }]}>
       <LinearGradient
-        colors={['#0A0D14', '#12151F']}
+        colors={['#0A0D14', '#1A202C']}
         style={styles.gradient}
       >
         <View style={styles.header}>
