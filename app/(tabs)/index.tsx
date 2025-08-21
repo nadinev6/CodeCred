@@ -73,6 +73,7 @@ const getLanguageColor = (language: string) => {
 
 const mockProjects: ProjectCardProps[] = [
   {
+    id: '1',
     title: 'DeFi Portfolio Tracker',
     author: 'alexdev',
     description: 'A comprehensive DeFi portfolio tracking application with real-time analytics and yield farming insights.',
@@ -82,6 +83,7 @@ const mockProjects: ProjectCardProps[] = [
     views: 1200,
   },
   {
+    id: '2',
     title: 'NFT Marketplace Smart Contracts',
     author: 'blockchain_builder',
     description: 'Secure and gas-optimized smart contracts for NFT trading with royalty management.',
@@ -91,6 +93,7 @@ const mockProjects: ProjectCardProps[] = [
     views: 890,
   },
   {
+    id: '3',
     title: 'AI Code Review Assistant',
     author: 'ml_engineer_pro',
     description: 'Machine learning model that provides intelligent code review suggestions and bug detection.',
@@ -100,6 +103,7 @@ const mockProjects: ProjectCardProps[] = [
     views: 2100,
   },
   {
+    id: '4',
     title: 'Cross-Chain Bridge Protocol',
     author: 'web3_architect',
     description: 'Decentralized protocol for secure asset transfers between different blockchain networks.',
@@ -141,7 +145,7 @@ export default function HomeScreen() {
         >
           <View style={styles.filterSection}>
             <ScrollView 
-              horizontal 
+                  CODECRED
               showsHorizontalScrollIndicator={false}
               style={styles.filterScroll}
             >
@@ -162,7 +166,7 @@ export default function HomeScreen() {
 
           <View style={styles.projectList}>
             {mockProjects.map((project, index) => (
-              <ProjectCard key={index} {...project} />
+              <ProjectCard key={project.id} {...project} />
             ))}
           </View>
         </ScrollView>
@@ -190,6 +194,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   maskedView: {
+    height: 28,
     marginBottom: 4,
   },
   maskText: {

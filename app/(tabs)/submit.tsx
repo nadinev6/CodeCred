@@ -198,12 +198,6 @@ export default function SubmitScreen() {
               </View>
             </View>
 
-            <View style={styles.blockchainInfo}>
-              <Text style={styles.blockchainTitle}>Blockchain Integration Required</Text>
-              <Text style={styles.blockchainText}>
-                To complete verification, this app needs to be built locally with XION MDK and Reclaim Protocol integration.
-              </Text>
-            </View>
           </View>
         );
 
