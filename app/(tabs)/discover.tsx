@@ -54,11 +54,11 @@ export default function DiscoverScreen() {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#0A0D14' }]}>
-      <LinearGradient
-        colors={['#0A0D14', '#1A202C']}
-        style={styles.gradient}
-      >
+    <LinearGradient
+      colors={['#0A0D14', '#1A202C']}
+      style={styles.gradient}
+    >
+      <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Discover Projects</Text>
           <Text style={styles.headerSubtitle}>Explore verified developer work</Text>
@@ -131,8 +131,8 @@ export default function DiscoverScreen() {
             </View>
           </View>
         </ScrollView>
-      </LinearGradient>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 

@@ -66,11 +66,11 @@ export const XionScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={['#0d1117', '#161b22', '#21262d']}
-        style={styles.gradient}
-      >
+    <LinearGradient
+      colors={['#0A0D14', '#1A202C']}
+      style={styles.gradient}
+    >
+      <SafeAreaView style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.title}>XION Wallet</Text>
           <Text style={styles.subtitle}>
@@ -109,8 +109,8 @@ export const XionScreen = () => {
             />
           )}
         </View>
-      </LinearGradient>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 

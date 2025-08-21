@@ -108,11 +108,11 @@ const mockProjects = [
 
 export default function ProfileScreen() {
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#0A0D14' }]}>
-      <LinearGradient
-        colors={['#0A0D14', '#1A202C']}
-        style={styles.gradient}
-      >
+    <LinearGradient
+      colors={['#0A0D14', '#1A202C']}
+      style={styles.gradient}
+    >
+      <SafeAreaView style={styles.container}>
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
@@ -251,8 +251,8 @@ export default function ProfileScreen() {
             </View>
           </View>
         </ScrollView>
-      </LinearGradient>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 

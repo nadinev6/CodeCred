@@ -111,11 +111,11 @@ const mockProjects: ProjectCardProps[] = [
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#0A0D14' }]}>
-      <LinearGradient
-        colors={['#0A0D14', '#1A202C']}
-        style={styles.gradient}
-      >
+    <LinearGradient
+      colors={['#0A0D14', '#1A202C']}
+      style={styles.gradient}
+    >
+      <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>CodeCred Feed</Text>
           <Text style={styles.headerSubtitle}>Discover verified developer projects</Text>
@@ -153,8 +153,8 @@ export default function HomeScreen() {
             ))}
           </View>
         </ScrollView>
-      </LinearGradient>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 

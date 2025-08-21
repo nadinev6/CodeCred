@@ -248,11 +248,11 @@ export default function SubmitScreen() {
   };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: '#0A0D14' }]}>
-      <LinearGradient
-        colors={['#0A0D14', '#1A202C']}
-        style={styles.gradient}
-      >
+    <LinearGradient
+      colors={['#0A0D14', '#1A202C']}
+      style={styles.gradient}
+    >
+      <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Submit Project</Text>
           <Text style={styles.headerSubtitle}>Get your project verified on the blockchain</Text>
@@ -288,8 +288,8 @@ export default function SubmitScreen() {
             </Text>
           </TouchableOpacity>
         </View>
-      </LinearGradient>
-    </SafeAreaView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 }
 
