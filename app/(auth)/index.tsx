@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Button } from '../components/ui/Button';
-import { xionService, XionAccount } from '../services/xion';
-import { reclaimService } from '../services/reclaim';
+import { router } from 'expo-router';
+import { Button } from '../../components/ui/Button';
+import { xionService, XionAccount } from '../../services/xion';
+import { reclaimService } from '../../services/reclaim';
 
-export default function AuthenticationScreen() {
+export default function SignInScreen() {
   const [account, setAccount] = useState<XionAccount | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,8 +18,11 @@ export default function AuthenticationScreen() {
 
   const checkConnection = async () => {
     try {
-      const connectedAccount = await xionService.getAccount();
+      const connectedAccount = await xionService.getCurrentAccount();
       setAccount(connectedAccount);
+      if (connectedAccount && connectedAccount.isConnected) {
+        router.replace('/(tabs)');
+      }
     } catch (err) {
       console.log('No account connected');
     }
@@ -29,8 +33,11 @@ export default function AuthenticationScreen() {
     setError(null);
     
     try {
-      const connectedAccount = await xionService.connect();
+      const connectedAccount = await xionService.connectAccount();
       setAccount(connectedAccount);
+      if (connectedAccount && connectedAccount.isConnected) {
+        router.replace('/(tabs)');
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to connect');
     } finally {
@@ -51,13 +58,13 @@ export default function AuthenticationScreen() {
     if (!account) return;
     
     try {
-      // This would integrate with Reclaim Protocol
-      const proof = await reclaimService.createProof({
-        provider: 'github',
-        parameters: {
-          username: 'example'
-        }
-      });
+      // Initialize Reclaim service if not already done
+      if (!reclaimService.isServiceInitialized()) {
+        await reclaimService.initialize();
+      }
+      
+      // Create proof for GitHub repository
+      const proof = await reclaimService.verifyGitHubRepository('https://github.com/example/repo');
       
       console.log('Proof created:', proof);
     } catch (err) {

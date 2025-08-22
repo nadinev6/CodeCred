@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { Stack, Redirect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { 
   useFonts,
@@ -7,6 +7,7 @@ import {
 } from '@expo-google-fonts/roboto-mono';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
+import { xionService } from '@/services/xion';
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
@@ -28,10 +29,14 @@ export default function RootLayout() {
     return null;
   }
 
+  // Check if user is authenticated
+  const isAuthenticated = xionService.isConnected();
+
   return (
     <>
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="AuthenticationScreen" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
