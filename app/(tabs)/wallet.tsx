@@ -224,7 +224,7 @@ const CodeCredWalletSetup = () => {
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Wallet Setup</Text>
-          <Text style={styles.headerSubtitle}>Connect your wallet to get started with CodeCred</Text>
+          <Text style={styles.headerSubtitle}>Connect your Keplr wallet</Text>
         </View>
 
         <StepIndicator currentStep={currentStep} totalSteps={steps.length} />
