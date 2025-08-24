@@ -251,9 +251,11 @@ const CodeCredWalletSetup = () => {
           )}
           
           <TouchableOpacity
-            style={styles.primaryButton}
+            style={[
+              styles.primaryButton,
+              currentStep === 0 && styles.singleButtonWide,
+            ]}
             onPress={handleNext}
-             currentStep === 0 && styles.singleButtonWide,
             disabled={loading}
           >
             <Text style={styles.primaryButtonText}>
