@@ -249,6 +249,7 @@ const CodeCredWalletSetup = () => {
               <TouchableOpacity style={styles.secondaryButton} onPress={handlePrevious}>
                 <Text style={styles.secondaryButtonText}>Previous</Text>
               </TouchableOpacity>
+              </TouchableOpacity>
             )}
             
             <TouchableOpacity
