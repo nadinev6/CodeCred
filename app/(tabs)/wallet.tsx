@@ -63,8 +63,6 @@ const CodeCredWalletSetup = () => {
   }
 
   const steps = [
-    'Welcome',
-    'Check Wallet',
     'Install Keplr',
     'Connect Wallet',
     'Complete Setup'
@@ -73,54 +71,6 @@ const CodeCredWalletSetup = () => {
   const renderStepContent = () => {
     switch (currentStep) {
       case 0:
-        return (
-          <View style={styles.stepContent}>
-            <View style={styles.iconContainer}>
-              <Text style={styles.icon}>💼</Text>
-            </View>
-            <Text style={styles.stepTitle}>Welcome to CodeCred</Text>
-            <Text style={styles.stepDescription}>
-              CodeCred helps you verify your coding projects using blockchain technology and zero-knowledge proofs.
-            </Text>
-            <View style={styles.featureList}>
-              <View style={styles.featureItem}>
-                <CircleCheck size={20} color="#22c55e" />
-                <Text style={styles.featureText}>Privacy-preserving verification</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <CircleCheck size={20} color="#22c55e" />
-                <Text style={styles.featureText}>Blockchain-backed credentials</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <CircleCheck size={20} color="#22c55e" />
-                <Text style={styles.featureText}>Mobile-friendly experience</Text>
-              </View>
-            </View>
-          </View>
-        );
-      case 1:
-        return (
-          <View style={styles.stepContent}>
-            <View style={styles.iconContainer}>
-              <Text style={styles.icon}>💼</Text>
-            </View>
-            <Text style={styles.stepTitle}>Wallet Setup Required</Text>
-            <Text style={styles.stepDescription}>
-              To use CodeCred, you'll need a Keplr wallet to interact with the XION blockchain.
-            </Text>
-            
-            <View style={styles.verificationBox}>
-              <AlertCircle size={20} color="#f59e0b" />
-              <View style={styles.verificationContent}>
-                <Text style={styles.verificationTitle}>Wallet Required</Text>
-                <Text style={styles.verificationText}>
-                  A compatible wallet is required to interact with the XION blockchain and verify your projects.
-                </Text>
-              </View>
-            </View>
-          </View>
-        );
-      case 2:
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
@@ -150,7 +100,7 @@ const CodeCredWalletSetup = () => {
             </View>
           </View>
         );
-      case 3:
+      case 1:
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
@@ -192,7 +142,7 @@ const CodeCredWalletSetup = () => {
             </View>
           </View>
         );
-      case 4:
+      case 2:
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
@@ -230,17 +180,10 @@ const CodeCredWalletSetup = () => {
 
   const handleNext = () => {
     if (currentStep < steps.length - 1) {
-      if (currentStep === 1) {
-        // Mock function for checking wallet status
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setCurrentStep(currentStep + 1);
-        }, 1000);
-      } else if (currentStep === 2) {
-        // Simulate install process
-        router.push('/install-keplr');
-      } else if (currentStep === 3) {
+      if (currentStep === 0) {
+        // Move to connect step after install
+        setCurrentStep(currentStep + 1);
+      } else if (currentStep === 1) {
         // Simulate connection
         setLoading(true);
         setTimeout(() => {
@@ -262,14 +205,10 @@ const CodeCredWalletSetup = () => {
   const getButtonText = () => {
     switch (currentStep) {
       case 0:
-        return 'Get Started';
+        return 'I\'ve Installed Keplr';
       case 1:
-        return loading ? 'Checking...' : 'Check Wallet Status';
-      case 2:
-        return 'Install Keplr Wallet';
-      case 3:
         return loading ? 'Connecting...' : 'Connect Keplr Wallet';
-      case 4:
+      case 2:
         return 'Start Using CodeCred';
       default:
         return 'Next';
