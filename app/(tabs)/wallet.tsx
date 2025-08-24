@@ -11,17 +11,6 @@ import {
 import { LinearGradient } from 'expo-linear-gradient'; 
 import { router } from 'expo-router'; 
 
-const COLORS = {
-  primary: '#6366f1',
-  secondary: '#8b5cf6',
-  background: '#f8fafc',
-  headerBackground: '#1a1f24', 
-  text: '#1e293b',
-  subtitle: '#64748b',
-  green: '#10b981',
-  blue: '#6366f1',
-};
-
 const CodeCredWalletSetup = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -55,7 +44,6 @@ const CodeCredWalletSetup = () => {
             </View>
             <TouchableOpacity onPress={() => setCurrentStep(1)} style={styles.primaryButton}>
               <Text style={styles.primaryButtonText}>Get Started</Text>
-              <Text style={styles.buttonIcon}>→</Text>
             </TouchableOpacity>
           </View>
         );
@@ -84,8 +72,7 @@ const CodeCredWalletSetup = () => {
               <Text style={styles.primaryButtonText}>
                 {loading ? 'Checking...' : 'Check Wallet Status'}
               </Text>
-              {loading && <ActivityIndicator style={styles.buttonIcon} color="white" />}
-              {!loading && <Text style={styles.buttonIcon}>🔄</Text>}
+              {loading && <ActivityIndicator style={styles.loadingIcon} color="white" />}
             </TouchableOpacity>
           </View>
         );
@@ -101,11 +88,9 @@ const CodeCredWalletSetup = () => {
             </Text>
             <TouchableOpacity onPress={() => router.push('/install-keplr')} style={styles.primaryButton}>
               <Text style={styles.primaryButtonText}>Install Keplr Wallet</Text>
-              <Text style={styles.buttonIcon}>🔗</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setCurrentStep(1)} style={styles.secondaryButton}>
               <Text style={styles.secondaryButtonText}>I've Installed Keplr</Text>
-              <Text style={styles.buttonIcon}>🔄</Text>
             </TouchableOpacity>
           </View>
         );
@@ -113,7 +98,7 @@ const CodeCredWalletSetup = () => {
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
-              {loading ? <ActivityIndicator size="large" color={COLORS.blue} /> : <Text style={styles.icon}>💼</Text>}
+              {loading ? <ActivityIndicator size="large" color="#00bfff" /> : <Text style={styles.icon}>💼</Text>}
             </View>
             <Text style={styles.stepTitle}>
               {loading ? 'Connecting...' : 'Connect Your Wallet'}
@@ -131,8 +116,7 @@ const CodeCredWalletSetup = () => {
               <Text style={styles.primaryButtonText}>
                 {loading ? 'Connecting...' : 'Connect Keplr Wallet'}
               </Text>
-              {loading && <ActivityIndicator style={styles.buttonIcon} color="white" />}
-              {!loading && <Text style={styles.buttonIcon}>→</Text>}
+              {loading && <ActivityIndicator style={styles.loadingIcon} color="white" />}
             </TouchableOpacity>
           </View>
         );
@@ -149,7 +133,7 @@ const CodeCredWalletSetup = () => {
             <View style={styles.walletInfo}>
               <View style={styles.walletInfoHeader}>
                 <Text style={styles.walletInfoIcon}>💼</Text>
-                <Text style={{ fontWeight: '600', color: COLORS.blue }}>Connected Wallet</Text>
+                <Text style={styles.walletInfoTitle}>Connected Wallet</Text>
               </View>
               <View style={styles.walletDetail}>
                 <Text style={styles.walletDetailLabel}>Address:</Text>
@@ -162,7 +146,6 @@ const CodeCredWalletSetup = () => {
             </View>
             <TouchableOpacity onPress={() => {}} style={styles.primaryButton}>
               <Text style={styles.primaryButtonText}>Start Using CodeCred</Text>
-              <Text style={styles.buttonIcon}>→</Text>
             </TouchableOpacity>
           </View>
         );
@@ -175,12 +158,12 @@ const CodeCredWalletSetup = () => {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
         <LinearGradient
-          colors={['#667eea', '#764ba2']}
+          colors={['#0A0D14', '#1A202C']}
           style={styles.fullScreenGradient}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
         >
-          <View style={styles.mainContentContainer}>
+          <View style={styles.contentContainer}>
             <View style={styles.header}>
               <Text style={styles.headerTitle}>CodeCred</Text>
               <Text style={styles.headerSubtitle}>Blockchain Project Verification</Text>
@@ -231,28 +214,26 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   container: { flexGrow: 1 },
   fullScreenGradient: { flex: 1 },
-  mainContentContainer: {
-    maxWidth: 480,
-    marginHorizontal: 'auto',
-    backgroundColor: COLORS.background,
+  contentContainer: {
     flex: 1,
   },
   header: {
     paddingVertical: 32,
     paddingHorizontal: 24,
     alignItems: 'center',
-    backgroundColor: COLORS.headerBackground,
+    backgroundColor: '#0d1117',
+    borderBottomWidth: 1,
+    borderBottomColor: '#1a1f24',
   },
   headerTitle: {
     fontSize: 40,
     fontWeight: '700',
-    color: 'white',
+    color: '#f0f6fc',
     marginBottom: 8,
   },
   headerSubtitle: {
     fontSize: 18,
-    color: 'white',
-    opacity: 0.9,
+    color: '#7d8590',
   },
   stepIndicator: {
     flexDirection: 'row',
@@ -260,7 +241,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 32,
     paddingHorizontal: 24,
-    backgroundColor: 'white',
+    backgroundColor: '#0f1216',
+    borderBottomWidth: 1,
+    borderBottomColor: '#1a1f24',
   },
   stepCircle: {
     width: 36,
@@ -268,51 +251,59 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e2e8f0',
+    backgroundColor: '#24292e',
+    borderWidth: 2,
+    borderColor: '#24292e',
   },
   stepCircleActive: {
-    backgroundColor: COLORS.blue,
+    backgroundColor: '#00bfff',
+    borderColor: '#00bfff',
   },
   stepCircleInactive: {
-    backgroundColor: '#e2e8f0',
+    backgroundColor: '#24292e',
+    borderColor: '#24292e',
   },
   stepCircleCompleted: {
-    backgroundColor: COLORS.green,
+    backgroundColor: '#22c55e',
+    borderColor: '#22c55e',
   },
   stepCircleText: {
     fontWeight: '600',
     fontSize: 14,
-    color: '#94a3b8',
+    color: '#7d8590',
   },
   stepCircleTextCompleted: {
-    color: 'white',
+    color: '#ffffff',
   },
   stepLine: {
     width: 30,
     height: 2,
     marginHorizontal: 8,
-    backgroundColor: '#e2e8f0',
+    backgroundColor: '#24292e',
   },
   stepLineActive: {
-    backgroundColor: COLORS.blue,
+    backgroundColor: '#00bfff',
   },
   stepContent: {
-    backgroundColor: 'white',
+    backgroundColor: '#0f1216',
     marginHorizontal: 24,
     marginBottom: 32,
     borderRadius: 16,
     padding: 32,
     alignItems: 'center',
-    elevation: 5,
+    borderWidth: 1,
+    borderColor: '#1a1f24',
   },
   iconContainer: {
     width: 120,
     height: 120,
     borderRadius: 60,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#1a1f24',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#24292e',
   },
   icon: {
     fontSize: 60,
@@ -320,13 +311,13 @@ const styles = StyleSheet.create({
   stepTitle: {
     fontSize: 28,
     fontWeight: '700',
-    color: COLORS.text,
+    color: '#f0f6fc',
     marginBottom: 12,
     textAlign: 'center',
   },
   stepDescription: {
     fontSize: 16,
-    color: COLORS.subtitle,
+    color: '#e6edf3',
     lineHeight: 24,
     marginBottom: 24,
     textAlign: 'center',
@@ -340,19 +331,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
     padding: 12,
-    backgroundColor: 'rgba(16, 185, 129, 0.05)',
+    backgroundColor: '#1a1f24',
     borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#24292e',
   },
   featureIcon: {
     marginRight: 12,
-    color: COLORS.green,
+    color: '#22c55e',
     fontSize: 24,
   },
   featureText: {
-    color: COLORS.text,
+    color: '#e6edf3',
   },
   primaryButton: {
-    backgroundColor: COLORS.blue,
+    backgroundColor: '#00bfff',
     borderRadius: 12,
     paddingVertical: 16,
     paddingHorizontal: 24,
@@ -363,19 +356,17 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   primaryButtonText: {
-    color: 'white',
+    color: '#ffffff',
     fontSize: 16,
     fontWeight: '600',
   },
-  buttonIcon: {
+  loadingIcon: {
     marginLeft: 8,
-    fontSize: 20,
-    color: 'white',
   },
   secondaryButton: {
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: COLORS.blue,
+    borderColor: '#00bfff',
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 24,
@@ -385,31 +376,36 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   secondaryButtonText: {
-    color: COLORS.blue,
+    color: '#00bfff',
     fontSize: 16,
     fontWeight: '600',
   },
   errorContainer: {
-    backgroundColor: '#fef2f2',
+    backgroundColor: '#f8514920',
     borderRadius: 8,
     padding: 12,
     marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#f8514940',
   },
   errorIcon: {
     fontSize: 14,
+    color: '#f85149',
   },
   errorText: {
-    color: '#dc2626',
+    color: '#f85149',
     fontSize: 14,
     marginLeft: 8,
   },
   walletInfo: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#1a1f24',
     borderRadius: 12,
     padding: 16,
     marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#24292e',
   },
   walletInfoHeader: {
     flexDirection: 'row',
@@ -419,7 +415,11 @@ const styles = StyleSheet.create({
   walletInfoIcon: {
     fontSize: 20,
     marginRight: 8,
-    color: COLORS.blue,
+    color: '#00bfff',
+  },
+  walletInfoTitle: {
+    fontWeight: '600',
+    color: '#00bfff',
   },
   walletDetail: {
     flexDirection: 'row',
@@ -427,11 +427,11 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   walletDetailLabel: {
-    color: COLORS.subtitle,
+    color: '#7d8590',
     fontSize: 14,
   },
   walletDetailValue: {
-    color: COLORS.text,
+    color: '#f0f6fc',
     fontWeight: '500',
     fontSize: 14,
   },
@@ -441,7 +441,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   footerText: {
-    color: '#94a3b8',
+    color: '#7d8590',
     fontSize: 12,
     textAlign: 'center',
   },
