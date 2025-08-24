@@ -211,14 +211,6 @@ const CodeCredWalletSetup = () => {
                       ]}
                     />
                   )}
-                </React.Fragment>
-              ))}
-            </View>
-            {renderStepContent()}
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </LinearGradient>
   );
 };
 
