@@ -244,8 +244,6 @@ const CodeCredWalletSetup = () => {
 
       <View style={styles.fixedBottomBarContainer}>
         <SafeAreaView edges={['bottom']} style={styles.bottomBarSafeArea}>
-          {currentStep > 0 && (
-            <TouchableOpacity style={styles.secondaryButton} onPress={handlePrevious}>
           <View style={styles.bottomBarContent}>
             {currentStep > 0 && (
               <TouchableOpacity style={styles.secondaryButton} onPress={handlePrevious}>
@@ -538,6 +536,9 @@ const styles = StyleSheet.create({
   },
   singleButtonWide: {
     width: '90%',
+  },
+  loadingIcon: {
+    marginLeft: 8,
   },
 });
 
