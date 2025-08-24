@@ -498,11 +498,12 @@ const styles = StyleSheet.create({
     borderTopColor: '#1a1f24',
     paddingHorizontal: 20,
     paddingBottom: 20,
-    flexDirection: 'row',
+    flexDirection: 'column',
+    alignItems: 'center',
     gap: 12,
   },
   secondaryButton: {
-    flex: 1,
+    minWidth: 200,
     backgroundColor: '#1a1f24',
     borderRadius: 8,
     paddingVertical: 10,
@@ -517,7 +518,7 @@ const styles = StyleSheet.create({
     color: '#f0f6fc',
   },
   primaryButton: {
-    flex: 1,
+    minWidth: 200,
     backgroundColor: '#00bfff',
     borderRadius: 8,
     paddingVertical: 10,
