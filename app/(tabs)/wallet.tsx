@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useFonts, RobotoMono_400Regular } from '@expo-google-fonts/roboto-mono';
+import { CircleCheck } from 'lucide-react-native';
 import {
   StyleSheet,
   Text,
@@ -39,15 +40,15 @@ const CodeCredWalletSetup = () => {
             </Text>
             <View style={styles.featureList}>
               <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}></Text>
+                <CircleCheck size={20} color="#22c55e" />
                 <Text style={styles.featureText}>Privacy-preserving verification</Text>
               </View>
               <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}></Text>
+                <CircleCheck size={20} color="#22c55e" />
                 <Text style={styles.featureText}>Blockchain-backed credentials</Text>
               </View>
               <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}></Text>
+                <CircleCheck size={20} color="#22c55e" />
                 <Text style={styles.featureText}>Mobile-friendly experience</Text>
               </View>
             </View>
@@ -98,9 +99,12 @@ const CodeCredWalletSetup = () => {
             <TouchableOpacity onPress={() => router.push('/install-keplr')} style={styles.primaryButton}>
               <Text style={styles.primaryButtonText}>Install Keplr Wallet</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setCurrentStep(1)} style={styles.secondaryButton}>
-              <Text style={styles.secondaryButtonText}>I've Installed Keplr</Text>
-            </TouchableOpacity>
+            
+            <View style={styles.buttonGroup}>
+              <TouchableOpacity onPress={() => setCurrentStep(1)} style={styles.secondaryButton}>
+                <Text style={styles.secondaryButtonText}>I've Installed Keplr</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         );
       case 3:
@@ -141,7 +145,6 @@ const CodeCredWalletSetup = () => {
             </Text>
             <View style={styles.walletInfo}>
               <View style={styles.walletInfoHeader}>
-                <Text style={styles.walletInfoIcon}>💼</Text>
                 <Text style={styles.walletInfoTitle}>Connected Wallet</Text>
               </View>
               <View style={styles.walletDetail}>
@@ -164,19 +167,21 @@ const CodeCredWalletSetup = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <ScrollView contentContainerStyle={styles.container}>
-        <LinearGradient
-          colors={['#0A0D14', '#1A202C']}
-          style={styles.fullScreenGradient}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
+    <LinearGradient
+      colors={['#0A0D14', '#1A202C']}
+      style={styles.gradient}
+    >
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Wallet</Text>
+        </View>
+        
+        <ScrollView 
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 180 }]}
         >
           <View style={styles.contentContainer}>
-            <View style={styles.header}>
-              <Text style={styles.headerTitle}>CodeCred</Text>
-              <Text style={styles.headerSubtitle}>Blockchain Project Verification</Text>
-            </View>
             <View style={styles.stepIndicator}>
               {[0, 1, 2, 3, 4].map((step, index) => (
                 <React.Fragment key={step}>
@@ -209,55 +214,54 @@ const CodeCredWalletSetup = () => {
               ))}
             </View>
             {renderStepContent()}
-            <View style={styles.footer}>
-              <Text style={styles.footerText}>Need help? Check our documentation or contact support.</Text>
-            </View>
           </View>
-        </LinearGradient>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1 },
-  container: { flexGrow: 1 },
-  fullScreenGradient: { flex: 1 },
-  contentContainer: {
+  container: {
+    flex: 1,
+  },
+  gradient: {
     flex: 1,
   },
   header: {
-    paddingVertical: 32,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-    backgroundColor: '#0d1117',
+    padding: 20,
+    paddingBottom: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#1a1f24',
+    borderBottomColor: '#21262d',
   },
   headerTitle: {
-    fontSize: 40,
+    fontSize: 28,
     fontWeight: '700',
     color: '#f0f6fc',
-    marginBottom: 8,
+    fontFamily: 'RobotoMono-Regular',
+    letterSpacing: 1.2,
   },
-  headerSubtitle: {
-    fontSize: 18,
-    color: '#7d8590',
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 20,
+  },
+    paddingHorizontal: 20,
   },
   stepIndicator: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 32,
-    paddingHorizontal: 24,
-    backgroundColor: '#0f1216',
+    paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#1a1f24',
+    borderBottomColor: '#21262d',
+    marginBottom: 20,
   },
   stepCircle: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#24292e',
@@ -295,30 +299,29 @@ const styles = StyleSheet.create({
   },
   stepContent: {
     backgroundColor: '#0f1216',
-    marginHorizontal: 24,
-    marginBottom: 32,
-    borderRadius: 16,
-    padding: 32,
+    borderRadius: 12,
+    padding: 20,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#1a1f24',
+    borderColor: '#21262d',
+    marginBottom: 20,
   },
   iconContainer: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     backgroundColor: '#1a1f24',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#24292e',
+    borderColor: '#21262d',
   },
   icon: {
-    fontSize: 60,
+    fontSize: 40,
   },
   stepTitle: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: '700',
     color: '#f0f6fc',
     marginBottom: 12,
@@ -328,38 +331,34 @@ const styles = StyleSheet.create({
   stepDescription: {
     fontSize: 16,
     color: '#e6edf3',
-    lineHeight: 24,
-    marginBottom: 24,
+    lineHeight: 20,
+    marginBottom: 16,
     textAlign: 'center',
   },
   featureList: {
     width: '100%',
-    marginBottom: 32,
+    marginBottom: 24,
+    gap: 12,
   },
   featureItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
-    padding: 12,
+    padding: 16,
     backgroundColor: '#1a1f24',
-    borderRadius: 8,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#24292e',
-  },
-  featureIcon: {
-    marginRight: 12,
-    color: '#22c55e',
-    fontSize: 24,
+    borderColor: '#21262d',
   },
   featureText: {
     color: '#e6edf3',
+    marginLeft: 12,
+    fontSize: 15,
   },
   primaryButton: {
     backgroundColor: '#00bfff',
-    borderRadius: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
-    flexDirection: 'row',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
@@ -370,30 +369,32 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  buttonGroup: {
+    width: '100%',
+    gap: 12,
+  },
   loadingIcon: {
     marginLeft: 8,
   },
   secondaryButton: {
-    backgroundColor: 'transparent',
-    borderWidth: 2,
-    borderColor: '#00bfff',
-    borderRadius: 12,
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    flexDirection: 'row',
+    backgroundColor: '#1a1f24',
+    borderRadius: 8,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '100%',
+    borderWidth: 1,
+    borderColor: '#24292e',
   },
   secondaryButtonText: {
-    color: '#00bfff',
+    color: '#f0f6fc',
     fontSize: 16,
     fontWeight: '600',
   },
   errorContainer: {
     backgroundColor: '#f8514920',
     borderRadius: 8,
-    padding: 12,
+    padding: 16,
     marginBottom: 16,
     flexDirection: 'row',
     alignItems: 'center',
@@ -411,25 +412,19 @@ const styles = StyleSheet.create({
   },
   walletInfo: {
     backgroundColor: '#1a1f24',
-    borderRadius: 12,
+    borderRadius: 8,
     padding: 16,
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#24292e',
+    borderColor: '#21262d',
   },
   walletInfoHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
     marginBottom: 12,
-  },
-  walletInfoIcon: {
-    fontSize: 20,
-    marginRight: 8,
-    color: '#00bfff',
   },
   walletInfoTitle: {
     fontWeight: '600',
-    color: '#00bfff',
+    color: '#f0f6fc',
+    fontSize: 16,
   },
   walletDetail: {
     flexDirection: 'row',
@@ -444,16 +439,6 @@ const styles = StyleSheet.create({
     color: '#f0f6fc',
     fontWeight: '500',
     fontSize: 14,
-  },
-  footer: {
-    paddingVertical: 32,
-    paddingHorizontal: 24,
-    alignItems: 'center',
-  },
-  footerText: {
-    color: '#7d8590',
-    fontSize: 12,
-    textAlign: 'center',
   },
 });
 
