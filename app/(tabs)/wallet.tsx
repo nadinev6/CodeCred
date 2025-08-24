@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     borderColor: '#21262d',
   },
   icon: {
-    fontSize: 40,
+    fontSize: 32,
   },
   stepTitle: {
     fontSize: 24,
