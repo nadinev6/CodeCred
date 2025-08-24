@@ -39,15 +39,15 @@ const CodeCredWalletSetup = () => {
             </Text>
             <View style={styles.featureList}>
               <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>🛡️</Text>
+                <Text style={styles.featureIcon}></Text>
                 <Text style={styles.featureText}>Privacy-preserving verification</Text>
               </View>
               <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>✅</Text>
+                <Text style={styles.featureIcon}></Text>
                 <Text style={styles.featureText}>Blockchain-backed credentials</Text>
               </View>
               <View style={styles.featureItem}>
-                <Text style={styles.featureIcon}>📱</Text>
+                <Text style={styles.featureIcon}></Text>
                 <Text style={styles.featureText}>Mobile-friendly experience</Text>
               </View>
             </View>
