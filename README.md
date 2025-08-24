@@ -132,6 +132,12 @@ Used for:
 
 ## 🎨 Design System
 
+The app follows a professional, GitHub-inspired design system with:
+- **Colors**: Sophisticated dark theme with accent colors for verification status and blockchain interactions
+- **Typography**: Clean, readable fonts with proper hierarchy and RobotoMono for technical elements
+- **Components**: Consistent spacing, interaction patterns, and professional styling
+- **Icons**: Comprehensive Lucide React Native icon library for consistent, professional iconography
+- **Professional Standards**: No emojis or unprofessional elements, maintaining enterprise-grade aesthetics
 
 ## 🧪 Testing
 
