@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFonts, RobotoMono_400Regular } from '@expo-google-fonts/roboto-mono';
-import { CircleCheck, Check, Wallet, Download, Link, CircleCheck as CheckCircle } from 'lucide-react-native';
+import { CircleCheck, Check, Wallet, Download, Link, CheckCircle } from 'lucide-react-native';
 import {
   StyleSheet,
   Text,
@@ -90,7 +90,7 @@ const CodeCredWalletSetup = () => {
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
-              <Text style={styles.icon}>📥</Text>
+              <Download size={40} color="#00bfff" />
             </View>
             <Text style={styles.stepTitle}>Install Keplr Wallet</Text>
             <Text style={styles.stepDescription}>
@@ -201,6 +201,7 @@ const CodeCredWalletSetup = () => {
                     >
                       {currentStep > step ? '✓' : step + 1}
                     </Text>
+                        <Check size={16} color="#ffffff" />
                   </View>
                   {index < 4 && (
                     <View
@@ -285,6 +286,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 14,
     color: '#7d8590',
+    fontFamily: 'RobotoMono-Regular',
   },
   stepCircleTextCompleted: {
     color: '#ffffff',
