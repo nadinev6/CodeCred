@@ -22,7 +22,7 @@ if (typeof global.process.version === 'undefined') {
   global.process.version = 'v18.0.0'; // Mock a Node.js version
 }
 if (typeof global.process.nextTick === 'undefined') {
-  global.process.nextTick = setImmediate; // Or setTimeout(fn, 0)
+  global.process.nextTick = (fn) => setTimeout(fn, 0);
 }
 
 import { useEffect } from 'react';
