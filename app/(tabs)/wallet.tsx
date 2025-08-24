@@ -190,9 +190,10 @@ const CodeCredWalletSetup = () => {
           setLoading(false);
           setCurrentStep(currentStep + 1);
         }, 2000);
-      } else {
-        setCurrentStep(currentStep + 1);
       }
+    } else {
+      // Final step - navigate to main app
+      router.replace('/(tabs)');
     }
   };
 
@@ -205,11 +206,11 @@ const CodeCredWalletSetup = () => {
   const getButtonText = () => {
     switch (currentStep) {
       case 0:
-        return 'I\'ve Installed Keplr';
+        return 'Next';
       case 1:
-        return loading ? 'Connecting...' : 'Connect Keplr Wallet';
+        return loading ? 'Connecting...' : 'Next';
       case 2:
-        return 'Start Using CodeCred';
+        return 'Next';
       default:
         return 'Next';
     }
@@ -373,9 +374,6 @@ const styles = StyleSheet.create({
     borderColor: '#24292e',
     alignSelf: 'center',
   },
-  icon: {
-    fontSize: 40,
-  },
   stepTitle: {
     fontSize: 24,
     fontWeight: '600',
@@ -499,6 +497,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#1a1f24',
     paddingHorizontal: 20,
+    paddingBottom: 20,
     flexDirection: 'row',
     gap: 12,
   },
