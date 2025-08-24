@@ -90,7 +90,7 @@ const CodeCredWalletSetup = () => {
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
-              <Download size={40} color="#00bfff" />
+              <Text style={styles.icon}>📥</Text>
             </View>
             <Text style={styles.stepTitle}>Install Keplr Wallet</Text>
             <Text style={styles.stepDescription}>
