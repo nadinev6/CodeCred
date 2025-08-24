@@ -61,7 +61,7 @@ const CodeCredWalletSetup = () => {
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
-              <Wallet size={40} color="#00bfff" />
+              <Text style={styles.icon}>💼</Text>
             </View>
             <Text style={styles.stepTitle}>Wallet Setup Required</Text>
             <Text style={styles.stepDescription}>
@@ -318,9 +318,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     borderColor: '#21262d',
-  },
-  icon: {
-    fontSize: 40,
   },
   stepTitle: {
     fontSize: 24,
