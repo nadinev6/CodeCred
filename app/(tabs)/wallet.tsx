@@ -253,6 +253,7 @@ const CodeCredWalletSetup = () => {
           <TouchableOpacity
             style={styles.primaryButton}
             onPress={handleNext}
+             currentStep === 0 && styles.singleButtonWide,
             disabled={loading}
           >
             <Text style={styles.primaryButtonText}>
@@ -530,6 +531,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#ffffff',
+  },
+  singleButtonWide: {
+    width: '90%',
   },
   loadingIcon: {
     marginLeft: 8,
