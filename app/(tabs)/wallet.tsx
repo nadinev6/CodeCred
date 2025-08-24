@@ -246,22 +246,24 @@ const CodeCredWalletSetup = () => {
         <SafeAreaView edges={['bottom']} style={styles.bottomBarSafeArea}>
           {currentStep > 0 && (
             <TouchableOpacity style={styles.secondaryButton} onPress={handlePrevious}>
-              <Text style={styles.secondaryButtonText}>Previous</Text>
+          <View style={styles.bottomBarContent}>
+            {currentStep > 0 && (
+              <TouchableOpacity style={styles.secondaryButton} onPress={handlePrevious}>
+                <Text style={styles.secondaryButtonText}>Previous</Text>
+              </TouchableOpacity>
+            )}
+            
+            <TouchableOpacity
+              style={styles.primaryButton}
+              onPress={handleNext}
+              disabled={loading}
+            >
+              <Text style={styles.primaryButtonText}>
+                {getButtonText()}
+              </Text>
+              {loading && <ActivityIndicator style={styles.loadingIcon} color="white" />}
             </TouchableOpacity>
-          )}
-          
-          <TouchableOpacity
-            style={[
-              styles.primaryButton,
-            ]}
-            onPress={handleNext}
-            disabled={loading}
-          >
-            <Text style={styles.primaryButtonText}>
-              {getButtonText()}
-            </Text>
-            {loading && <ActivityIndicator style={styles.loadingIcon} color="white" />}
-          </TouchableOpacity>
+          </View>
         </SafeAreaView>
       </View>
     </LinearGradient>
@@ -498,9 +500,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderTopWidth: 1,
     borderTopColor: '#1a1f24',
-    paddingHorizontal: 20,
+  },
+  bottomBarContent: {
     flexDirection: 'row',
     gap: 12,
+    paddingHorizontal: 20,
   },
   secondaryButton: {
     flex: 1,
