@@ -497,8 +497,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: '#1a1f24',
     paddingHorizontal: 20,
-    paddingBottom: 20,
-    paddingBottom: 20,
     flexDirection: 'row',
     gap: 12,
   },
