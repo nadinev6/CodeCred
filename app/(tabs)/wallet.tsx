@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFonts, RobotoMono_400Regular } from '@expo-google-fonts/roboto-mono';
-import { CircleCheck, Check, Wallet, Download, Link, CheckCircle } from 'lucide-react-native';
+import { CircleCheck, Check, Wallet, Download, Link, CircleCheck as CheckCircle } from 'lucide-react-native';
 import {
   StyleSheet,
   Text,
@@ -211,6 +211,14 @@ const CodeCredWalletSetup = () => {
                       ]}
                     />
                   )}
+                </React.Fragment>
+              ))}
+            </View>
+            {renderStepContent()}
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </LinearGradient>
   );
 };
 
