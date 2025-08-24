@@ -1,0 +1,20 @@
+# XION Testnet Configuration
+EXPO_PUBLIC_TREASURY_CONTRACT_ADDRESS="xion10anj5nxcraw48eyjsj6um7lqep863xmx2t0q4z26ksaxr6q8ykdse7rl7s"
+EXPO_PUBLIC_RPC_ENDPOINT="https://rpc.xion-testnet-2.burnt.com:443"
+EXPO_PUBLIC_REST_ENDPOINT="https://api.xion-testnet-2.burnt.com"
+EXPO_PUBLIC_CODE_ID="1289"
+EXPO_PUBLIC_VERIFICATION_CONTRACT_ADDRESS="xion1qf8jtznwf0tykpg7e65gwafwp47rwxl4x2g2kldvv357s6frcjlsh2m24e"
+EXPO_PUBLIC_RUM_CONTRACT_ADDRESS="xion1c77rapv7w7nygxqwa76nnmq3kn45kpc9jz68x37fu882nvzt59pstyan0g"
+
+# Reclaim Protocol Configuration
+EXPO_PUBLIC_RECLAIM_APP_ID=0x376B86445693a5a596eB869182c0f3D79c945E1F
+EXPO_PUBLIC_RECLAIM_PROVIDER_ID="76afcf07-4c8f-4a63-b545-0d4c4f955164"
+# IMPORTANT: Never commit your App Secret to version control
+EXPO_PUBLIC_RECLAIM_APP_SECRET="0x0d98d38c03d794ee7f51ad56f8036d11514d453709b9699a35e2c9463dea4c59"
+
+# API Configuration
+EXPO_PUBLIC_API_BASE_URL=https://api.codecred.app 
+
+# Feature Flags
+EXPO_PUBLIC_ENABLE_BLOCKCHAIN=false
+EXPO_PUBLIC_ENABLE_MOCK_DATA=true
