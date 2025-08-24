@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useFonts, RobotoMono_400Regular } from '@expo-google-fonts/roboto-mono';
 import {
   StyleSheet,
   Text,
@@ -15,6 +16,14 @@ const CodeCredWalletSetup = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [fontsLoaded] = useFonts({
+    'RobotoMono-Regular': RobotoMono_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   const renderStepContent = () => {
     switch (currentStep) {
@@ -314,6 +323,7 @@ const styles = StyleSheet.create({
     color: '#f0f6fc',
     marginBottom: 12,
     textAlign: 'center',
+    fontFamily: 'RobotoMono-Regular',
   },
   stepDescription: {
     fontSize: 16,
