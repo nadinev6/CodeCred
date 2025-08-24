@@ -253,7 +253,6 @@ const CodeCredWalletSetup = () => {
           <TouchableOpacity
             style={[
               styles.primaryButton,
-              currentStep === 0 && styles.singleButtonWide,
             ]}
             onPress={handleNext}
             disabled={loading}
@@ -501,11 +500,10 @@ const styles = StyleSheet.create({
     borderTopColor: '#1a1f24',
     paddingHorizontal: 20,
     flexDirection: 'row',
-    justifyContent: 'center',
     gap: 12,
   },
   secondaryButton: {
-    width: '45%',
+    flex: 1,
     backgroundColor: '#1a1f24',
     borderRadius: 8,
     paddingVertical: 10,
@@ -520,7 +518,7 @@ const styles = StyleSheet.create({
     color: '#f0f6fc',
   },
   primaryButton: {
-    width: '45%',
+    flex: 1,
     backgroundColor: '#00bfff',
     borderRadius: 8,
     paddingVertical: 10,
@@ -536,9 +534,6 @@ const styles = StyleSheet.create({
   },
   singleButtonWide: {
     width: '90%',
-  },
-  loadingIcon: {
-    marginLeft: 8,
   },
 });
 
