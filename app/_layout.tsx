@@ -1,3 +1,7 @@
+import { Buffer } from 'buffer';
+global.Buffer = Buffer;
+global.process = require('process');
+
 import { useEffect } from 'react';
 import { Stack, Redirect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
