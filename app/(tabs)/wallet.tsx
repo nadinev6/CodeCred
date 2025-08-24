@@ -150,7 +150,7 @@ const CodeCredWalletSetup = () => {
             </View>
             <Text style={styles.stepTitle}>Wallet Connected!</Text>
             <Text style={styles.stepDescription}>
-              Your Keplr wallet is now connected to CodeCred. You're ready to start verifying your projects.
+              Your Keplr wallet is now connected to CodeCred.
             </Text>
             
             <View style={styles.reviewSection}>
