@@ -507,10 +507,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#1a1f24',
     borderRadius: 8,
     paddingVertical: 10,
-    paddingHorizontal: 20,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#24292e',
+    paddingHorizontal: 20,
   },
   secondaryButtonText: {
     fontSize: 16,
@@ -522,10 +522,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#00bfff',
     borderRadius: 8,
     paddingVertical: 10,
-    paddingHorizontal: 20,
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
+    paddingHorizontal: 20,
   },
   primaryButtonText: {
     fontSize: 16,
