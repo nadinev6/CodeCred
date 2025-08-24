@@ -194,14 +194,17 @@ const CodeCredWalletSetup = () => {
                     ]}
                   >
                     <Text
-                      style={[
-                        styles.stepCircleText,
-                        currentStep > step && styles.stepCircleTextCompleted,
-                      ]}
-                    >
-                      {currentStep > step ? '✓' : step + 1}
-                    </Text>
-                        <Check size={16} color="#ffffff" />
+                    {currentStep > step ? (
+                      <Check size={16} color="#ffffff" />
+                    ) : (
+                      <Text
+                        style={[
+                          styles.stepCircleText,
+                        ]}
+                      >
+                        {step + 1}
+                      </Text>
+                    )}
                   </View>
                   {index < 4 && (
                     <View
