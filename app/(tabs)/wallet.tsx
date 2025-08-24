@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: 20,
   },
+  contentContainer: {
     paddingHorizontal: 20,
   },
   stepIndicator: {
