@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFonts, RobotoMono_400Regular } from '@expo-google-fonts/roboto-mono';
-import { CircleCheck, Check, Wallet, Download, Link, CircleCheck as CheckCircle, CircleAlert as AlertCircle } from 'lucide-react-native';
+import { CircleCheck, Check, Wallet, Download, Link, CircleCheck as CheckCircle, CircleAlert as AlertCircle, WalletMinimal } from 'lucide-react-native';
 import {
   StyleSheet,
   Text,
@@ -74,7 +74,7 @@ const CodeCredWalletSetup = () => {
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
-              <Text style={styles.icon}>📥</Text>
+              <Download size={40} color="#f0f6fc" />
             </View>
             <Text style={styles.stepTitle}>Install Keplr Wallet</Text>
             <Text style={styles.stepDescription}>
@@ -104,7 +104,7 @@ const CodeCredWalletSetup = () => {
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
-              {loading ? <ActivityIndicator size="large" color="#00bfff" /> : <Text style={styles.icon}>💼</Text>}
+              {loading ? <ActivityIndicator size="large" color="#00bfff" /> : <WalletMinimal size={40} color="#f0f6fc" />}
             </View>
             <Text style={styles.stepTitle}>
               {loading ? 'Connecting...' : 'Connect Your Wallet'}
@@ -146,7 +146,7 @@ const CodeCredWalletSetup = () => {
         return (
           <View style={styles.stepContent}>
             <View style={styles.iconContainer}>
-              <Text style={styles.icon}>✅</Text>
+              <CheckCircle size={40} color="#22c55e" />
             </View>
             <Text style={styles.stepTitle}>Wallet Connected!</Text>
             <Text style={styles.stepDescription}>
