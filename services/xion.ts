@@ -715,7 +715,7 @@ const xionConfig: XionConfig = {
 
 
 // Export singleton instance (keeping your pattern)
-export const xionService = new XionServiceSimplified(xionConfig);
+export const xionService = new XionService(xionConfig);
 
 // Export types 
 export type { 
