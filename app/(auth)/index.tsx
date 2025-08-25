@@ -113,12 +113,12 @@ export default function SignInScreen() {
 
           <View style={styles.buttonGroup}>
             <Button
-              title="Connect Wallet"
+              title="Connect"
               onPress={handleConnect}
               style={styles.halfWidthButton}
             />
             <Button
-              title="Browse App"
+              title="Browse"
               onPress={handleBrowseApp}
               variant="secondary"
               style={styles.halfWidthButton}
