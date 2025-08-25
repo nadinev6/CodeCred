@@ -1,5 +1,5 @@
 // XION blockchain integration service using React Hooks
-import { useAbstraxion } from '@burnt-labs/abstraxion';
+import { useAbstraxionAccount, useAbstraxionSigningClient } from '@burnt-labs/abstraxion';
 import { SigningStargateClient, StargateClient } from '@cosmjs/stargate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { xionConfig } from '../config/xion';
@@ -41,12 +41,15 @@ export interface ReclaimProofData {
 // Custom hook for XION service
 export function useXionService() {
   const { 
-    abstraxion, 
-    isConnected, 
-    account: abstraxionAccount,
-    connect,
-    disconnect: abstraxionDisconnect
-  } = useAbstraxion();
+    data: abstraxionAccount, 
+    connect, 
+    logout: abstraxionDisconnect,
+    isConnecting: isAbstraxionConnecting 
+  } = useAbstraxionAccount();
+  const { client: abstraxionSigningClient } = useAbstraxionSigningClient();
+
+  // Determine isConnected based on abstraxionAccount data
+  const isConnected = !!abstraxionAccount?.bech32Address;
 
   // Convert abstraxion account to our XionAccount format
   const account: XionAccount | null = abstraxionAccount ? {
@@ -114,15 +117,15 @@ export function useXionService() {
    * Store project data on blockchain
    */
   const storeProjectData = async (projectData: ProjectData): Promise<string> => {
-    if (!abstraxion || !account) {
+    if (!abstraxionSigningClient || !account) {
       throw new Error('XION service not connected');
     }
 
     try {
       console.log('📝 Storing project data on XION blockchain...', projectData);
 
-      // Get signing client
-      const signingClient = await abstraxion.getSigningStargateClient();
+      // Use the signing client from the hook
+      const signingClient = abstraxionSigningClient;
 
       // Create transaction message for storing project data
       const msg = {
@@ -224,15 +227,15 @@ export function useXionService() {
    * Verify project with Reclaim Protocol integration
    */
   const verifyProject = async (projectId: string, reclaimProof?: ReclaimProofData): Promise<boolean> => {
-    if (!abstraxion || !account) {
+    if (!abstraxionSigningClient || !account) {
       throw new Error('XION service not connected');
     }
 
     try {
       console.log('🔐 Verifying project with XION zkTLS and Reclaim Protocol:', projectId);
 
-      // Get signing client
-      const signingClient = await abstraxion.getSigningStargateClient();
+      // Use the signing client from the hook
+      const signingClient = abstraxionSigningClient;
 
       // Create verification message
       const msg = {
@@ -292,15 +295,15 @@ export function useXionService() {
     verificationData: any, 
     projectId?: string
   ): Promise<TransactionResult> => {
-    if (!abstraxion || !account) {
+    if (!abstraxionSigningClient || !account) {
       throw new Error('XION service not connected');
     }
 
     try {
       console.log('📤 Submitting Reclaim proof to XION blockchain...');
 
-      // Get signing client
-      const signingClient = await abstraxion.getSigningStargateClient();
+      // Use the signing client from the hook
+      const signingClient = abstraxionSigningClient;
 
       const msg = {
         typeUrl: '/cosmwasm.wasm.v1.MsgExecuteContract',
@@ -343,9 +346,9 @@ export function useXionService() {
    */
   const getAccountBalance = async (address: string): Promise<string> => {
     try {
-      if (!abstraxion) return '0';
+      if (!abstraxionSigningClient) return '0';
       
-      const signingClient = await abstraxion.getSigningStargateClient();
+      const signingClient = abstraxionSigningClient;
       const balance = await signingClient.getBalance(address, 'uxion');
       return balance.amount;
     } catch (error) {
@@ -392,18 +395,19 @@ export function useXionService() {
    * Check if service is ready
    */
   const isReady = (): boolean => {
-    return abstraxion !== null;
+    return abstraxionSigningClient !== null;
   };
 
   return {
     // State
     account,
     isConnected,
+    isConnecting: isAbstraxionConnecting,
     
     // Methods
     connectAccount,
     getCurrentAccount,
-    disconnect,
+    disconnect: abstraxionDisconnect,
     storeProjectData,
     getProjectData,
     verifyProject,
