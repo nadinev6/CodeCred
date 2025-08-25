@@ -1,6 +1,6 @@
 // XION blockchain integration service 
 
-import { Abstraxion } from '@burnt-labs/abstraxion-react-native';
+import { Abstraxion } from '@burnt-labs/abstraxion';
 import { AbstractAccountId, AbstractAccountInfo } from '@burnt-labs/abstract-signers';
 import { SigningStargateClient, StargateClient } from '@cosmjs/stargate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
