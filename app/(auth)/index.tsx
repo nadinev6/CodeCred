@@ -70,7 +70,7 @@ export default function SignInScreen() {
               </Text>
               
               <Button
-                title="Continue to App"
+                title="Continue"
                 onPress={handleContinueToApp}
               />
             </View>
