@@ -42,7 +42,7 @@ export interface ReclaimProofData {
 export function useXionService() {
   const { 
     data: abstraxionAccount, 
-    connect, 
+    login, 
     logout: abstraxionDisconnect,
     isConnecting: isAbstraxionConnecting 
   } = useAbstraxionAccount();
@@ -52,8 +52,8 @@ export function useXionService() {
   console.log('🔍 useAbstraxionAccount hook state:', {
     hasData: !!abstraxionAccount,
     dataAddress: abstraxionAccount?.bech32Address,
-    connectType: typeof connect,
-    connectValue: connect,
+    loginType: typeof login,
+    loginValue: login,
     isConnecting: isAbstraxionConnecting,
     logoutType: typeof abstraxionDisconnect,
   });
@@ -75,20 +75,20 @@ export function useXionService() {
     try {
       console.log('🔐 Connecting XION account...');
       
-      // Add defensive check for connect function
-      if (typeof connect !== 'function') {
-        console.error('DEBUG: Abstraxion `connect` function is not available. This indicates an issue with AbstraxionProvider setup or context.');
-        console.error('DEBUG: connect value:', connect);
+      // Add defensive check for login function
+      if (typeof login !== 'function') {
+        console.error('DEBUG: Abstraxion `login` function is not available. This indicates an issue with AbstraxionProvider setup or context.');
+        console.error('DEBUG: login value:', login);
         console.error('DEBUG: useAbstraxionAccount hook returned:', { 
           data: abstraxionAccount, 
-          connect, 
+          login, 
           logout: abstraxionDisconnect,
           isConnecting: isAbstraxionConnecting 
         });
-        throw new Error('Wallet connection service not ready. Abstraxion `connect` function is missing.');
+        throw new Error('Wallet connection service not ready. Abstraxion `login` function is missing.');
       }
 
-      await connect();
+      await login();
       
       if (!abstraxionAccount) {
         throw new Error('Failed to connect account');
