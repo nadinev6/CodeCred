@@ -44,12 +44,9 @@ CodeCred is a professional blockchain-powered platform that enables developers t
 - **Protocol**: Reclaim Protocol
 - **State Management**: React Context/Hooks
 
-## 📱 Screenshots
+## 📱 Demo
 
-<img src="assets/images/IMG_0015.PNG" width="300" alt="Home Feed Screen">
-<img src="assets/images/IMG_0016.PNG" width="300" alt="Discover Screen">
-<img src="assets/images/IMG_0019.PNG" width="300" alt="Submit Project Screen">
-<img src="assets/images/IMG_0020.PNG" width="300" alt="Profile Screen">
+Watch the Demo Video: [Demo Video](https://www.dropbox.com/scl/fi/ub5mcn7ehoa7wm8rmye36/Demo-MOCK.mp4?rlkey=5tvjc9ch48796a1n9of0kxvez&st=2caah0t0&dl=0)
 
 ## 🚦 Getting Started
 
