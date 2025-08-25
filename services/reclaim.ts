@@ -170,12 +170,37 @@ class ReclaimService {
       });
 
       if (!response.ok) {
-        throw new Error(`API request failed: ${response.statusText}`);
+        let errorMessage = `API request failed: ${response.status} ${response.statusText}`;
+        
+        try {
+          const errorBody = await response.text();
+          if (errorBody) {
+            console.error('API Error Response Body:', errorBody);
+            errorMessage += ` - ${errorBody}`;
+          }
+        } catch (bodyError) {
+          console.error('Failed to read error response body:', bodyError);
+        }
+        
+        console.error('Full API Error Details:', {
+          status: response.status,
+          statusText: response.statusText,
+          url: response.url,
+          headers: Object.fromEntries(response.headers.entries()),
+        });
+        
+        throw new Error(errorMessage);
       }
 
       return await response.json();
     } catch (error) {
-      console.error('API call failed:', error);
+      console.error('API call failed with detailed error:', {
+        message: error instanceof Error ? error.message : 'Unknown error',
+        stack: error instanceof Error ? error.stack : undefined,
+        apiUrl: this.apiBaseUrl,
+        appId: this.config.appId,
+        hasAppSecret: !!this.config.appSecret,
+      });
       return null;
     }
   }

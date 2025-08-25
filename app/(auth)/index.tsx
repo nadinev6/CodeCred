@@ -41,30 +41,8 @@ export default function SignInScreen() {
     }
   };
 
-  const handleDisconnect = async () => {
-    try {
-      await disconnect();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to disconnect');
-    }
-  };
-
-  const handleCreateProof = async () => {
-    if (!account) return;
-    
-    try {
-      // Initialize Reclaim service if not already done
-      if (!reclaimService.isServiceInitialized()) {
-        await reclaimService.initialize();
-      }
-      
-      // Create proof for GitHub repository
-      const proof = await reclaimService.verifyGitHubRepository('https://github.com/example/repo');
-      
-      console.log('Proof created:', proof);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create proof');
-    }
+  const handleContinueToApp = () => {
+    router.replace('/(tabs)');
   };
 
   return (
@@ -92,15 +70,8 @@ export default function SignInScreen() {
               </Text>
               
               <Button
-                title="Create Proof"
-                onPress={handleCreateProof}
-                style={{ marginBottom: 10 }}
-              />
-              
-              <Button
-                title="Disconnect"
-                onPress={handleDisconnect}
-                variant="secondary"
+                title="Continue to App"
+                onPress={handleContinueToApp}
               />
             </View>
           ) : (
