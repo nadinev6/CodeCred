@@ -77,7 +77,7 @@ export default function SignInScreen() {
           {account ? (
             <View style={styles.connectedContainer}>
               <Text style={styles.connectedText}>
-                ✅ Wallet Connected
+                Wallet Connected
               </Text>
               <Text style={styles.addressText}>
                 {account.address}
