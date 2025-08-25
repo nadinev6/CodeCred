@@ -7,6 +7,8 @@ import { Button } from '../../components/ui/Button';
 import { xionService, XionAccount } from '../../services/xion';
 import { reclaimService } from '../../services/reclaim';
 
+// REMOVED: import { ReclaimProofRequest } from '@reclaimprotocol/js-sdk';
+
 export default function SignInScreen() {
   const [account, setAccount] = useState<XionAccount | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
@@ -18,13 +20,24 @@ export default function SignInScreen() {
 
   const checkConnection = async () => {
     try {
+      // Initialize XION service if not already initialized
+      if (!xionService.isReady()) {
+        console.log('Initializing XION service...');
+        const initialized = await xionService.initialize();
+        if (!initialized) {
+          setError('Failed to initialize XION service');
+          return;
+        }
+      }
+
       const connectedAccount = await xionService.getCurrentAccount();
       setAccount(connectedAccount);
       if (connectedAccount && connectedAccount.isConnected) {
         router.replace('/(tabs)');
       }
     } catch (err) {
-      console.log('No account connected');
+      console.log('Connection check failed:', err);
+      setError(err instanceof Error ? err.message : 'Connection check failed');
     }
   };
 
@@ -33,12 +46,22 @@ export default function SignInScreen() {
     setError(null);
     
     try {
+      // Ensure XION service is initialized
+      if (!xionService.isReady()) {
+        console.log('Initializing XION service...');
+        const initialized = await xionService.initialize();
+        if (!initialized) {
+          throw new Error('Failed to initialize XION service');
+        }
+      }
+
       const connectedAccount = await xionService.connectAccount();
       setAccount(connectedAccount);
       if (connectedAccount && connectedAccount.isConnected) {
         router.replace('/(tabs)');
       }
     } catch (err) {
+      console.error('Connection failed:', err);
       setError(err instanceof Error ? err.message : 'Failed to connect');
     } finally {
       setIsConnecting(false);

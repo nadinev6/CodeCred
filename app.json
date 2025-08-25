@@ -3,6 +3,7 @@
     "name": "CodeCred",
     "slug": "code-cred",
     "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
     "icon": "./assets/images/1755687723565.png",
     "scheme": "codecred",

@@ -4,21 +4,23 @@ A professional mobile application built with React Native and Expo, designed to 
 
 ## 🎯 Project Goals
 
-CodeCred aims to create a comprehensive platform where developers can:
+CodeCred is a professional blockchain-powered platform that enables developers to:
 
-- **Showcase verified projects** with blockchain-backed credentials
-- **Discover quality repositories** through a curated feed
-- **Submit projects for verification** with an intuitive multi-step flow
-- **Build trusted developer profiles** with verifiable achievements
+- **Showcase verified projects** with immutable blockchain-backed credentials
+- **Discover quality repositories** through a professionally curated discovery feed
+- **Submit projects for verification** with a streamlined, secure multi-step process
+- **Build trusted developer profiles** with cryptographically verifiable achievements
+- **Manage blockchain interactions** through integrated wallet functionality
 
 ## 🚀 Features
 
 ### Core Functionality
-- **Profile Management**: Clean user profiles with stats, verified projects, and professional presentation
-- **Discovery Feed**: Search and filter through verified projects with advanced discovery tools
-- **Project Submission**: Multi-step verification flow for repository submissions
-- **Project Details**: Comprehensive project views with metrics, language distribution, and README display
-- **Verification System**: Blockchain-based project verification and credentialing
+- **Secure Wallet Integration**: Professional wallet setup and management with Keplr integration
+- **Profile Management**: Clean user profiles with comprehensive stats, verified projects, and professional presentation
+- **Discovery Feed**: Advanced search and filtering through verified projects with intelligent categorization
+- **Project Submission**: Streamlined multi-step verification flow with real-time status tracking
+- **Project Details**: Comprehensive project views with detailed metrics, language analysis, and documentation
+- **Blockchain Verification**: Immutable project verification and credential storage on XION blockchain
 
 ### Design & UX
 - **GitHub-Inspired UI**: Professional, clean interface mimicking GitHub's mobile design
@@ -37,11 +39,10 @@ CodeCred aims to create a comprehensive platform where developers can:
 
 - **Framework**: React Native with Expo SDK
 - **Navigation**: Expo Router
-- **Styling**: NativeWind (Tailwind CSS for React Native)
+- **Styling**: Custom StyleSheet with professional design system
 - **Blockchain**: XION MDK
 - **Protocol**: Reclaim Protocol
 - **State Management**: React Context/Hooks
-- **UI Components**: Custom components with Lucide React Native icons
 
 ## 📱 Screenshots
 
@@ -131,11 +132,12 @@ Used for:
 
 ## 🎨 Design System
 
-The app follows a GitHub-inspired design system with:
-- **Colors**: Dark theme with accent colors for verification status
-- **Typography**: Clean, readable fonts with proper hierarchy
-- **Components**: Consistent spacing and interaction patterns
-- **Icons**: Lucide React Native icon library
+The app follows a professional, GitHub-inspired design system with:
+- **Colors**: Sophisticated dark theme with accent colors for verification status and blockchain interactions
+- **Typography**: Clean, readable fonts with proper hierarchy and RobotoMono for technical elements
+- **Components**: Consistent spacing, interaction patterns, and professional styling
+- **Icons**: Comprehensive Lucide React Native icon library for consistent, professional iconography
+- **Professional Standards**: No emojis or unprofessional elements, maintaining enterprise-grade aesthetics
 
 ## 🧪 Testing
 

@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import { useEffect } from 'react';
 import { router } from 'expo-router';
-import { Chrome as Home, Search, Plus, User } from 'lucide-react-native';
+import { Chrome as Home, Search, Plus, User, WalletMinimal } from 'lucide-react-native';
 import { xionService } from '@/services/xion';
 
 export default function TabLayout() {
@@ -61,6 +61,15 @@ export default function TabLayout() {
           title: 'Submit',
           tabBarIcon: ({ size, color }) => (
             <Plus size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="wallet"
+        options={{
+          title: 'Wallet',
+          tabBarIcon: ({ size, color }) => (
+            <WalletMinimal size={size} color={color} />
           ),
         }}
       />
