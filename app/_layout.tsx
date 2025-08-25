@@ -57,6 +57,14 @@ export default function RootLayout() {
     return null;
   }
 
+  // Debug: Log the xionConfig being passed to AbstraxionProvider
+  console.log('🔧 XION Config for AbstraxionProvider:', {
+    dappId: xionConfig.appId,
+    chainId: xionConfig.chainId,
+    rpcUrl: xionConfig.rpcUrl,
+    restUrl: xionConfig.restUrl,
+    redirectUri: xionConfig.redirectUri,
+  });
   return (
     <AbstraxionProvider
       config={{

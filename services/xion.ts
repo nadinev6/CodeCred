@@ -48,6 +48,15 @@ export function useXionService() {
   } = useAbstraxionAccount();
   const { client: abstraxionSigningClient } = useAbstraxionSigningClient();
 
+  // Debug: Log what useAbstraxionAccount is returning
+  console.log('🔍 useAbstraxionAccount hook state:', {
+    hasData: !!abstraxionAccount,
+    dataAddress: abstraxionAccount?.bech32Address,
+    connectType: typeof connect,
+    connectValue: connect,
+    isConnecting: isAbstraxionConnecting,
+    logoutType: typeof abstraxionDisconnect,
+  });
   // Determine isConnected based on abstraxionAccount data
   const isConnected = !!abstraxionAccount?.bech32Address;
 
