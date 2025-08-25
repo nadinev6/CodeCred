@@ -22,5 +22,5 @@ export const xionConfig: XionConfig = {
   chainId: 'xion-testnet-2', // Updated to testnet-2
   rpcUrl: process.env.EXPO_PUBLIC_RPC_ENDPOINT || 'https://rpc.xion-testnet-2.burnt.com:443',
   restUrl: process.env.EXPO_PUBLIC_REST_ENDPOINT || 'https://api.xion-testnet-2.burnt.com',
-  redirectUri: 'codecred://auth/callback',
+  redirectUri: 'codecred://',
 };
