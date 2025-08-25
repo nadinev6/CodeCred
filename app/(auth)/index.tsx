@@ -4,59 +4,32 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { Button } from '../../components/ui/Button';
-import { xionService, XionAccount } from '../../services/xion';
+import { useXionService, XionAccount } from '../../services/xion';
 import { reclaimService } from '../../services/reclaim';
 
-// REMOVED: import { ReclaimProofRequest } from '@reclaimprotocol/js-sdk';
-
 export default function SignInScreen() {
-  const [account, setAccount] = useState<XionAccount | null>(null);
+  const { 
+    account, 
+    isConnected, 
+    connectAccount, 
+    disconnect 
+  } = useXionService();
+  
   const [isConnecting, setIsConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    checkConnection();
-  }, []);
-
-  const checkConnection = async () => {
-    try {
-      // Initialize XION service if not already initialized
-      if (!xionService.isReady()) {
-        console.log('Initializing XION service...');
-        const initialized = await xionService.initialize();
-        if (!initialized) {
-          setError('Failed to initialize XION service');
-          return;
-        }
-      }
-
-      const connectedAccount = await xionService.getCurrentAccount();
-      setAccount(connectedAccount);
-      if (connectedAccount && connectedAccount.isConnected) {
-        router.replace('/(tabs)');
-      }
-    } catch (err) {
-      console.log('Connection check failed:', err);
-      setError(err instanceof Error ? err.message : 'Connection check failed');
+    if (isConnected && account) {
+      router.replace('/(tabs)');
     }
-  };
+  }, []);
 
   const handleConnect = async () => {
     setIsConnecting(true);
     setError(null);
     
     try {
-      // Ensure XION service is initialized
-      if (!xionService.isReady()) {
-        console.log('Initializing XION service...');
-        const initialized = await xionService.initialize();
-        if (!initialized) {
-          throw new Error('Failed to initialize XION service');
-        }
-      }
-
-      const connectedAccount = await xionService.connectAccount();
-      setAccount(connectedAccount);
+      const connectedAccount = await connectAccount();
       if (connectedAccount && connectedAccount.isConnected) {
         router.replace('/(tabs)');
       }
@@ -70,8 +43,7 @@ export default function SignInScreen() {
 
   const handleDisconnect = async () => {
     try {
-      await xionService.disconnect();
-      setAccount(null);
+      await disconnect();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to disconnect');
     }

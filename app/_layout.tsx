@@ -34,7 +34,8 @@ import {
 } from '@expo-google-fonts/roboto-mono';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
-import { xionService } from '@/services/xion';
+import { AbstraxionProvider } from '@burnt-labs/abstraxion-react-native';
+import { xionConfig } from '@/config/xion';
 
 // Prevent splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
@@ -56,17 +57,24 @@ export default function RootLayout() {
     return null;
   }
 
-  // Check if user is authenticated
-  const isAuthenticated = xionService.isConnected();
-
   return (
-    <>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </>
+    <AbstraxionProvider
+      config={{
+        dappId: xionConfig.appId,
+        chainId: xionConfig.chainId,
+        rpcUrl: xionConfig.rpcUrl,
+        restUrl: xionConfig.restUrl,
+        redirectUri: xionConfig.redirectUri,
+      }}
+    >
+      <>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
+      </>
+    </AbstraxionProvider>
   );
 }
