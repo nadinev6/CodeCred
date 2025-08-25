@@ -66,6 +66,19 @@ export function useXionService() {
     try {
       console.log('🔐 Connecting XION account...');
       
+      // Add defensive check for connect function
+      if (typeof connect !== 'function') {
+        console.error('DEBUG: Abstraxion `connect` function is not available. This indicates an issue with AbstraxionProvider setup or context.');
+        console.error('DEBUG: connect value:', connect);
+        console.error('DEBUG: useAbstraxionAccount hook returned:', { 
+          data: abstraxionAccount, 
+          connect, 
+          logout: abstraxionDisconnect,
+          isConnecting: isAbstraxionConnecting 
+        });
+        throw new Error('Wallet connection service not ready. Abstraxion `connect` function is missing.');
+      }
+
       await connect();
       
       if (!abstraxionAccount) {
