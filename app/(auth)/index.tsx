@@ -19,7 +19,7 @@ export default function SignInScreen() {
   useEffect(() => {
     if (isConnected && account?.address) {
       console.log('✅ Authentication successful, navigating to main app');
-      router.replace('/(tabs)');
+      router.replace('/(tabs)/profile');
     }
   }, [isConnected, account]);
 

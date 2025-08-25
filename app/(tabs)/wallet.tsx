@@ -1,221 +1,81 @@
-import React, { useState } from 'react';
-import { useFonts, RobotoMono_400Regular } from '@expo-google-fonts/roboto-mono';
-import { CircleCheck, Check, Wallet, Download, Link, CircleCheck as CheckCircle, CircleAlert as AlertCircle, WalletMinimal } from 'lucide-react-native';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
-  ActivityIndicator,
-} from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient'; 
-import { router } from 'expo-router'; 
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import { WalletMinimal, LogOut, ExternalLink, CircleCheck } from 'lucide-react-native';
+import { router } from 'expo-router';
+import { useXionService } from '@/services/xion';
 
-interface StepIndicatorProps {
-  currentStep: number;
-  totalSteps: number;
-}
+export default function WalletScreen() {
+  const { account, isConnected, disconnect } = useXionService();
 
-const StepIndicator: React.FC<StepIndicatorProps> = ({ currentStep, totalSteps }) => (
-  <View style={styles.stepContainer}>
-    {Array.from({ length: totalSteps }, (_, index) => (
-      <View key={index} style={styles.stepItem}>
-        <View style={[
-          styles.stepCircle,
-          index < currentStep ? styles.stepCompleted : 
-          index === currentStep ? styles.stepActive : styles.stepInactive
-        ]}>
-          {index < currentStep ? (
-            <CheckCircle size={16} color="#00bfff" />
-          ) : (
-            <Text style={[
-              styles.stepNumber,
-              index === currentStep ? styles.stepNumberActive : styles.stepNumberInactive
-            ]}>
-              {index + 1}
-            </Text>
-          )}
-        </View>
-        {index < totalSteps - 1 && (
-          <View style={[
-            styles.stepLine,
-            index < currentStep ? styles.stepLineCompleted : styles.stepLineInactive
-          ]} />
-        )}
-      </View>
-    ))}
-  </View>
-);
+  const handleConnectWallet = () => {
+    router.push('/(auth)');
+  };
 
-const CodeCredWalletSetup = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const handleDisconnect = async () => {
+    try {
+      await disconnect();
+    } catch (error) {
+      console.error('Failed to disconnect wallet:', error);
+    }
+  };
 
-  const [fontsLoaded] = useFonts({
-    'RobotoMono-Regular': RobotoMono_400Regular,
-  });
+  if (!isConnected || !account) {
+    // Not connected - show connection prompt
+    return (
+      <LinearGradient
+        colors={['#0A0D14', '#1A202C']}
+        style={styles.gradient}
+      >
+        <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>Wallet</Text>
+            <Text style={styles.headerSubtitle}>Connect your wallet to verify projects</Text>
+          </View>
 
-  if (!fontsLoaded) {
-    return null;
+          <ScrollView 
+            style={styles.scrollView}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={[styles.scrollContent, { paddingBottom: 180 }]}
+          >
+            <View style={styles.emptyState}>
+              <View style={styles.iconContainer}>
+                <WalletMinimal size={48} color="#7d8590" />
+              </View>
+              
+              <Text style={styles.emptyTitle}>No Wallet Connected</Text>
+              <Text style={styles.emptyDescription}>
+                Connect your XION wallet to submit and verify projects on the blockchain.
+              </Text>
+
+              <View style={styles.featureList}>
+                <View style={styles.featureItem}>
+                  <CircleCheck size={20} color="#00bfff" />
+                  <Text style={styles.featureText}>Submit projects for verification</Text>
+                </View>
+                <View style={styles.featureItem}>
+                  <CircleCheck size={20} color="#00bfff" />
+                  <Text style={styles.featureText}>Store credentials on blockchain</Text>
+                </View>
+                <View style={styles.featureItem}>
+                  <CircleCheck size={20} color="#00bfff" />
+                  <Text style={styles.featureText}>Build verified developer profile</Text>
+                </View>
+              </View>
+
+              <TouchableOpacity style={styles.connectButton} onPress={handleConnectWallet}>
+                <WalletMinimal size={20} color="#ffffff" />
+                <Text style={styles.connectButtonText}>Connect Wallet</Text>
+              </TouchableOpacity>
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </LinearGradient>
+    );
   }
 
-  const steps = [
-    'Install Keplr',
-    'Connect Wallet',
-    'Complete Setup'
-  ];
-
-  const renderStepContent = () => {
-    switch (currentStep) {
-      case 0:
-        return (
-          <View style={styles.stepContent}>
-            <View style={styles.iconContainer}>
-              <Download size={40} color="#f0f6fc" />
-            </View>
-            <Text style={styles.stepTitle}>Install Keplr Wallet</Text>
-            <Text style={styles.stepDescription}>
-              Keplr wallet is not installed on your device. Let's get it set up!
-            </Text>
-            
-            <View style={styles.verificationSteps}>
-              <View style={styles.verificationStep}>
-                <Download size={24} color="#3b82f6" />
-                <View style={styles.verificationStepContent}>
-                  <Text style={styles.verificationStepTitle}>Download Keplr</Text>
-                  <Text style={styles.verificationStepText}>Install the Keplr wallet app</Text>
-                </View>
-              </View>
-
-              <View style={styles.verificationStep}>
-                <AlertCircle size={24} color="#7d8590" />
-                <View style={styles.verificationStepContent}>
-                  <Text style={styles.verificationStepTitle}>Setup Account</Text>
-                  <Text style={styles.verificationStepText}>Create or import your wallet</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        );
-      case 1:
-        return (
-          <View style={styles.stepContent}>
-            <View style={styles.iconContainer}>
-              {loading ? <ActivityIndicator size="large" color="#00bfff" /> : <WalletMinimal size={40} color="#f0f6fc" />}
-            </View>
-            <Text style={styles.stepTitle}>
-              {loading ? 'Connecting...' : 'Connect Your Wallet'}
-            </Text>
-            <Text style={styles.stepDescription}>
-              {loading ? 'Please approve the connection in your Keplr wallet' : 'Connect your Keplr wallet to start using CodeCred'}
-            </Text>
-            
-            {error && (
-              <View style={styles.verificationBox}>
-                <AlertCircle size={20} color="#f85149" />
-                <View style={styles.verificationContent}>
-                  <Text style={styles.verificationTitle}>Connection Error</Text>
-                  <Text style={styles.verificationText}>{error}</Text>
-                </View>
-              </View>
-            )}
-
-            <View style={styles.verificationSteps}>
-              <View style={styles.verificationStep}>
-                <CheckCircle size={24} color="#22c55e" />
-                <View style={styles.verificationStepContent}>
-                  <Text style={styles.verificationStepTitle}>Keplr Detected</Text>
-                  <Text style={styles.verificationStepText}>Wallet found and ready to connect</Text>
-                </View>
-              </View>
-
-              <View style={styles.verificationStep}>
-                <AlertCircle size={24} color="#f59e0b" />
-                <View style={styles.verificationStepContent}>
-                  <Text style={styles.verificationStepTitle}>XION Network</Text>
-                  <Text style={styles.verificationStepText}>Connecting to XION blockchain...</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-        );
-      case 2:
-        return (
-          <View style={styles.stepContent}>
-            <View style={styles.iconContainer}>
-              <CheckCircle size={40} color="#22c55e" />
-            </View>
-            <Text style={styles.stepTitle}>Wallet Connected!</Text>
-            <Text style={styles.stepDescription}>
-              Your Keplr wallet is now connected to CodeCred.
-            </Text>
-            
-            <View style={styles.reviewSection}>
-              <Text style={styles.reviewTitle}>Wallet Information</Text>
-              
-              <View style={styles.reviewItem}>
-                <Text style={styles.reviewLabel}>Address</Text>
-                <Text style={styles.reviewValue}>xion1abc...xyz</Text>
-              </View>
-
-              <View style={styles.reviewItem}>
-                <Text style={styles.reviewLabel}>Balance</Text>
-                <Text style={styles.reviewValue}>1.00 XION</Text>
-              </View>
-
-              <View style={styles.reviewItem}>
-                <Text style={styles.reviewLabel}>Network</Text>
-                <Text style={styles.reviewValue}>XION Mainnet</Text>
-              </View>
-            </View>
-          </View>
-        );
-      default:
-        return null;
-    }
-  };
-
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      if (currentStep === 0) {
-        // Move to connect step after install
-        setCurrentStep(currentStep + 1);
-      } else if (currentStep === 1) {
-        // Simulate connection
-        setLoading(true);
-        setTimeout(() => {
-          setLoading(false);
-          setCurrentStep(currentStep + 1);
-        }, 2000);
-      }
-    } else {
-      // Final step - navigate to main app
-      router.replace('/(tabs)');
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const getButtonText = () => {
-    switch (currentStep) {
-      case 0:
-        return 'Next';
-      case 1:
-        return loading ? 'Connecting...' : 'Next';
-      case 2:
-        return 'Next';
-      default:
-        return 'Next';
-    }
-  };
-
+  // Connected - show wallet info
   return (
     <LinearGradient
       colors={['#0A0D14', '#1A202C']}
@@ -223,50 +83,65 @@ const CodeCredWalletSetup = () => {
     >
       <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Wallet Setup</Text>
-          <Text style={styles.headerSubtitle}>Connect your Keplr wallet</Text>
+          <Text style={styles.headerTitle}>Wallet</Text>
+          <Text style={styles.headerSubtitle}>Manage your connected wallet</Text>
         </View>
-
-        <StepIndicator currentStep={currentStep} totalSteps={steps.length} />
 
         <ScrollView 
           style={styles.scrollView}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[styles.scrollContent, { paddingBottom: 120 }]}
+          contentContainerStyle={[styles.scrollContent, { paddingBottom: 180 }]}
         >
-          <View style={styles.stepHeader}>
-            <Text style={styles.stepTitleHeader}>{steps[currentStep]}</Text>
+          <View style={styles.walletCard}>
+            <View style={styles.walletHeader}>
+              <View style={styles.walletIcon}>
+                <WalletMinimal size={24} color="#00bfff" />
+              </View>
+              <View style={styles.walletInfo}>
+                <Text style={styles.walletName}>XION Wallet</Text>
+                <View style={styles.statusBadge}>
+                  <CircleCheck size={16} color="#22c55e" />
+                  <Text style={styles.statusText}>Connected</Text>
+                </View>
+              </View>
+            </View>
+
+            <View style={styles.walletDetails}>
+              <View style={styles.detailItem}>
+                <Text style={styles.detailLabel}>Address</Text>
+                <Text style={styles.detailValue}>{account.address}</Text>
+              </View>
+
+              <View style={styles.detailItem}>
+                <Text style={styles.detailLabel}>Balance</Text>
+                <Text style={styles.detailValue}>{account.balance || '0'} XION</Text>
+              </View>
+
+              <View style={styles.detailItem}>
+                <Text style={styles.detailLabel}>Network</Text>
+                <Text style={styles.detailValue}>XION Testnet</Text>
+              </View>
+            </View>
           </View>
 
-          {renderStepContent()}
-        </ScrollView>
-      </SafeAreaView>
-
-      <View style={styles.fixedBottomBarContainer}>
-        <SafeAreaView edges={['bottom']} style={styles.bottomBarSafeArea}>
-          <View style={styles.bottomBarContent}>
-            {currentStep > 0 && (
-              <TouchableOpacity style={styles.secondaryButton} onPress={handlePrevious}>
-                <Text style={styles.secondaryButtonText}>Previous</Text>
-              </TouchableOpacity>
-            )}
+          <View style={styles.actionsSection}>
+            <Text style={styles.sectionTitle}>Actions</Text>
             
-            <TouchableOpacity
-              style={styles.primaryButton}
-              onPress={handleNext}
-              disabled={loading}
-            >
-              <Text style={styles.primaryButtonText}>
-                {getButtonText()}
-              </Text>
-              {loading && <ActivityIndicator style={styles.loadingIcon} color="white" />}
+            <TouchableOpacity style={styles.actionButton}>
+              <ExternalLink size={20} color="#7d8590" />
+              <Text style={styles.actionButtonText}>View on Explorer</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.disconnectButton} onPress={handleDisconnect}>
+              <LogOut size={20} color="#f85149" />
+              <Text style={styles.disconnectButtonText}>Disconnect Wallet</Text>
             </TouchableOpacity>
           </View>
-        </SafeAreaView>
-      </View>
+        </ScrollView>
+      </SafeAreaView>
     </LinearGradient>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -291,78 +166,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#7d8590',
   },
-  stepContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#1a1f24',
-  },
-  stepItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  stepCircle: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-  },
-  stepCompleted: {
-    backgroundColor: '#00bfff20',
-    borderColor: '#00bfff',
-  },
-  stepActive: {
-    backgroundColor: '#3b82f6',
-    borderColor: '#3b82f6',
-  },
-  stepInactive: {
-    backgroundColor: 'transparent',
-    borderColor: '#24292e',
-  },
-  stepNumber: {
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  stepNumberActive: {
-    color: '#ffffff',
-  },
-  stepNumberInactive: {
-    color: '#7d8590',
-  },
-  stepLine: {
-    width: 40,
-    height: 2,
-    marginHorizontal: 8,
-  },
-  stepLineCompleted: {
-    backgroundColor: '#00bfff',
-  },
-  stepLineInactive: {
-    backgroundColor: '#24292e',
-  },
   scrollView: {
     flex: 1,
   },
   scrollContent: {
     paddingBottom: 20,
   },
-  stepHeader: {
-    padding: 20,
-    paddingBottom: 12,
-  },
-  stepTitleHeader: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#f0f6fc',
-  },
-  stepContent: {
-    padding: 20,
-    paddingTop: 0,
+  emptyState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 40,
+    paddingTop: 80,
   },
   iconContainer: {
     width: 80,
@@ -371,29 +186,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#1a1f24',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 24,
     borderWidth: 1,
     borderColor: '#24292e',
-    alignSelf: 'center',
   },
-  stepTitle: {
+  emptyTitle: {
     fontSize: 24,
     fontWeight: '600',
     color: '#f0f6fc',
     marginBottom: 12,
     textAlign: 'center',
   },
-  stepDescription: {
+  emptyDescription: {
     fontSize: 16,
     color: '#7d8590',
-    lineHeight: 20,
-    marginBottom: 24,
     textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: 32,
   },
   featureList: {
     width: '100%',
-    gap: 12,
-    marginBottom: 24,
+    gap: 16,
+    marginBottom: 32,
   },
   featureItem: {
     flexDirection: 'row',
@@ -409,137 +223,116 @@ const styles = StyleSheet.create({
     color: '#f0f6fc',
     marginLeft: 12,
   },
-  verificationBox: {
-    flexDirection: 'row',
-    backgroundColor: '#f59e0b20',
-    borderRadius: 8,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#f59e0b40',
-    marginBottom: 24,
-  },
-  verificationContent: {
-    flex: 1,
-    marginLeft: 12,
-  },
-  verificationTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#f59e0b',
-    marginBottom: 4,
-  },
-  verificationText: {
-    fontSize: 14,
-    color: '#e6edf3',
-    lineHeight: 20,
-  },
-  verificationSteps: {
-    gap: 16,
-    marginBottom: 24,
-  },
-  verificationStep: {
+  connectButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#0f1216',
-    borderRadius: 8,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#1a1f24',
-  },
-  verificationStepContent: {
-    flex: 1,
-    marginLeft: 16,
-  },
-  verificationStepTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#f0f6fc',
-    marginBottom: 4,
-  },
-  verificationStepText: {
-    fontSize: 14,
-    color: '#7d8590',
-  },
-  reviewSection: {
-    gap: 16,
-    marginBottom: 24,
-  },
-  reviewTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: '#f0f6fc',
-    marginBottom: 8,
-  },
-  reviewItem: {
-    backgroundColor: '#0f1216',
-    borderRadius: 8,
-    padding: 16,
-    borderWidth: 1,
-    borderColor: '#1a1f24',
-  },
-  reviewLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#7d8590',
-    marginBottom: 6,
-  },
-  reviewValue: {
-    fontSize: 16,
-    color: '#f0f6fc',
-  },
-  fixedBottomBarContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'transparent',
-  },
-  bottomBarSafeArea: {
-    backgroundColor: 'transparent',
-    borderTopWidth: 1,
-    borderTopColor: '#1a1f24',
-  },
-  bottomBarContent: {
-    flexDirection: 'row',
-    gap: 12,
-    paddingHorizontal: 20,
-  },
-  secondaryButton: {
-    flex: 1,
-    backgroundColor: '#1a1f24',
-    borderRadius: 8,
-    paddingVertical: 10,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#24292e',
-    paddingHorizontal: 20,
-  },
-  secondaryButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#f0f6fc',
-  },
-  primaryButton: {
-    flex: 1,
     backgroundColor: '#00bfff',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
     borderRadius: 8,
-    paddingVertical: 10,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
+    gap: 8,
   },
-  primaryButtonText: {
+  connectButtonText: {
     fontSize: 16,
     fontWeight: '600',
     color: '#ffffff',
   },
-  singleButtonWide: {
-    width: '90%',
+  walletCard: {
+    margin: 20,
+    backgroundColor: '#0f1216',
+    borderRadius: 12,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: '#1a1f24',
   },
-  loadingIcon: {
-    marginLeft: 8,
+  walletHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  walletIcon: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#00bfff20',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  walletInfo: {
+    flex: 1,
+  },
+  walletName: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#f0f6fc',
+    marginBottom: 4,
+  },
+  statusBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  statusText: {
+    fontSize: 14,
+    color: '#22c55e',
+    fontWeight: '500',
+  },
+  walletDetails: {
+    gap: 16,
+  },
+  detailItem: {
+    gap: 6,
+  },
+  detailLabel: {
+    fontSize: 14,
+    color: '#7d8590',
+    fontWeight: '500',
+  },
+  detailValue: {
+    fontSize: 16,
+    color: '#f0f6fc',
+    fontFamily: 'RobotoMono-Regular',
+  },
+  actionsSection: {
+    margin: 20,
+    marginTop: 0,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#f0f6fc',
+    marginBottom: 16,
+  },
+  actionButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1a1f24',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#24292e',
+    gap: 12,
+  },
+  actionButtonText: {
+    fontSize: 16,
+    color: '#f0f6fc',
+    fontWeight: '500',
+  },
+  disconnectButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f8514920',
+    borderRadius: 8,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#f8514940',
+    gap: 12,
+  },
+  disconnectButtonText: {
+    fontSize: 16,
+    color: '#f85149',
+    fontWeight: '500',
   },
 });
-
-export default CodeCredWalletSetup;

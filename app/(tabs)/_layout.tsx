@@ -1,19 +1,7 @@
 import { Tabs } from 'expo-router';
-import { useEffect } from 'react';
-import { router } from 'expo-router';
 import { Chrome as Home, Search, Plus, User, WalletMinimal } from 'lucide-react-native';
-import { useXionService } from '@/services/xion';
 
 export default function TabLayout() {
-  const { isConnected } = useXionService();
-
-  useEffect(() => {
-    // Check authentication status when tabs load
-    if (!isConnected) {
-      router.replace('/(auth)');
-    }
-  }, [isConnected]);
-
   return (
     <Tabs
       screenOptions={{
