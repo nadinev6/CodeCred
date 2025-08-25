@@ -4,15 +4,33 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { Button } from '../../components/ui/Button';
-import { useXionService } from '../../services/xion';
+import { useAbstraxionAccount } from '@burnt-labs/abstraxion-react-native';
 
 export default function SignInScreen() {
-  const { 
-    account, 
-    isConnected, 
+  const {
+    data: abstraxionAccount,
+    login,
+    logout: abstraxionDisconnect,
     isConnecting,
-    connectAccount, 
-  } = useXionService();
+  } = useAbstraxionAccount();
+
+  console.log('DEBUG: login function directly in SignInScreen:', login);
+
+  const isConnected = !!abstraxionAccount?.bech32Address;
+  const account = abstraxionAccount ? {
+    address: abstraxionAccount.bech32Address,
+    publicKey: abstraxionAccount.publicKey,
+    isConnected: isConnected,
+    balance: '0', // Placeholder, actual balance fetching is in useXionService
+  } : null;
+
+  const connectAccount = async () => {
+    if (typeof login !== 'function') {
+      console.error('DEBUG: Abstraxion `login` function is not available directly in SignInScreen.');
+      throw new Error('Wallet connection service not ready. Abstraxion `login` function is missing.');
+    }
+    await login();
+  };
   
   const [error, setError] = useState<string | null>(null);
   const [hasAttemptedConnect, setHasAttemptedConnect] = useState(false);
