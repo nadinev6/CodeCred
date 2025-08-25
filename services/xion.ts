@@ -1,5 +1,5 @@
 // XION blockchain integration service using React Hooks
-import { useAbstraxion } from '@burnt-labs/abstraxion-react-native';
+import { useAbstraxion } from '@burnt-labs/abstraxion';
 import { SigningStargateClient, StargateClient } from '@cosmjs/stargate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { xionConfig } from '../config/xion';
