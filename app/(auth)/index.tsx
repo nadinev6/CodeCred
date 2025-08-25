@@ -29,8 +29,8 @@ export default function SignInScreen() {
     setError(null);
     
     try {
-      const connectedAccount = await connectAccount();
-      if (connectedAccount && connectedAccount.isConnected) {
+      await connectAccount();
+      if (account && account.isConnected) {
         router.replace('/(tabs)');
       }
     } catch (err) {
