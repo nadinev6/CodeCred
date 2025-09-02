@@ -29,6 +29,7 @@
     "@reclaimprotocol/zk-fetch": "^0.5.1",
     "buffer": "^6.0.3",
     "expo": "53.0.22",
+    "expo-auth-session": "^6.2.1",
     "expo-blur": "~14.1.5",
     "expo-build-properties": "^0.14.8",
     "expo-camera": "~16.1.11",
