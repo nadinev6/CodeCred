@@ -1,4 +1,5 @@
 // XION blockchain configuration
+import * as AuthSession from 'expo-auth-session';
 
 export interface XionConfig {
   networkUrl: string;
@@ -11,6 +12,16 @@ export interface XionConfig {
   redirectUri?: string;
 }
 
+// Generate dynamic redirect URI for current environment
+const dynamicRedirectUri = AuthSession.makeRedirectUri({
+  scheme: 'codecred',
+  path: 'auth',
+});
+
+// Log the redirect URI for Stytch dashboard configuration
+console.log('🔗 Generated Redirect URI for Stytch Dashboard:', dynamicRedirectUri);
+console.log('📋 Copy this URI and add it to your Stytch Dashboard at: https://stytch.com/dashboard/redirect-urls');
+
 // XION configuration using environment variables
 export const xionConfig: XionConfig = {
   // Updated to testnet-2 configuration
@@ -22,5 +33,5 @@ export const xionConfig: XionConfig = {
   chainId: 'xion-testnet-2', // Updated to testnet-2
   rpcUrl: process.env.EXPO_PUBLIC_RPC_ENDPOINT || 'https://rpc.xion-testnet-2.burnt.com:443',
   restUrl: process.env.EXPO_PUBLIC_REST_ENDPOINT || 'https://api.xion-testnet-2.burnt.com',
-  redirectUri: 'codecred://',
+  redirectUri: dynamicRedirectUri,
 };
