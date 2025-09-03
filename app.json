@@ -14,7 +14,8 @@
       "bundleIdentifier": "com.nadinev.codecred",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
-      }
+      },
+      "associatedDomains": ["applinks:app.codecred.com"]
     },
     "web": {
       "bundler": "metro",
@@ -49,7 +50,20 @@
     },
     "android": {
       "package": "com.nadinev.codecred",
-      "edgeToEdgeEnabled": false
+      "edgeToEdgeEnabled": false,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "app.codecred.com",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     }
   }
 }
